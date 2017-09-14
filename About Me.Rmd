@@ -1,0 +1,13 @@
+---
+title: "Introduction"
+author: "Nathan Bendriem"
+date: "September 14, 2017"
+output: html_document
+---
+## Background
+- Masters student in Resources, Environment, and Sustainability
+- Focus on Coho Salmon fisheries, hatchery production, and economics
+- Avid hiker and diver
+- Upcoming CEO of Sand Dollar Enterprises
+
+![alt text](https://www.facebook.com/photo.php?fbid=10207998732580141&set=a.1516763793045.2077354.1052996015&type=3&theater)
