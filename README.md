@@ -2,4 +2,20 @@
 
 Welcome intructor, TAs and peers
 
-This is the repository of Nathan Bendriem
+
+# Hello STAT545 peeeps
+My name is Nathan Bendriem
+## About Me
+- Masters student in Resources, Environment, and Sustainability
+- Focus on Coho Salmon fisheries, hatchery production, and economics
+- Avid hiker and diver
+- Upcoming CEO of Sand Dollar Enterprises
+
+
+## Progress:
+
+- For the README file:
+    + I edited the file using RStudio
+    + I am making this page using RStudio and will commit, pull and push to the Github Repo
+  
+Looking forward to the rest of the semester!

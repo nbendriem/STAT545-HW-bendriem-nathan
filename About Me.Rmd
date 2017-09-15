@@ -1,5 +1,5 @@
 ---
-
+asdfasdf
 ---
 
 # Hello STAT545 peeeps
@@ -18,3 +18,5 @@ My name is Nathan Bendriem
     + I am making this page using RStudio and will commit, pull and push to the Github Repo
   
 Looking forward to the rest of the semester!  
+
+
