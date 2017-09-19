@@ -1,0 +1,24 @@
+---
+title: "hw01_gapminder.rmd"
+author: "Nathan Bendriem"
+date: "September 19, 2017"
+output: html_document
+---
+
+library(tidyverse)
+gapminder
+plot(lifeExp ~ year, gapminder)
+library(gapminder)
+load(gapminder)
+library(gapminder)
+names(gapminder)
+```{r}
+plot(lifeExp ~ year, gapminder)
+```
+```{r}
+plot(lifeExp ~ gdpPercap, gapminder)
+```
+```{r}
+plot(lifeExp ~ log(gdpPercap), gapminder)
+```
+
