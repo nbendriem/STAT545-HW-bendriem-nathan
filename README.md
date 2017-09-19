@@ -5,6 +5,9 @@ Welcome intructor, TAs and peers
 
 # Hello STAT545 peeps
 My name is Nathan Bendriem, and welcome to my GitHub page!
+
+![](http://gph.is/1knyiY5)
+
 ## About Me
 - Masters student in Resources, Environment, and Sustainability
 - Focus on Coho Salmon fisheries, hatchery production, and economics
