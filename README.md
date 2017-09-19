@@ -6,7 +6,7 @@ Welcome intructor, TAs and peers
 # Hello STAT545 peeps
 My name is Nathan Bendriem, and welcome to my GitHub page!
 
-![](http://gph.is/1knyiY5)
+![](https://media.giphy.com/media/3i7zenReaUuI0/giphy.gif)
 
 ## About Me
 - Masters student in Resources, Environment, and Sustainability
