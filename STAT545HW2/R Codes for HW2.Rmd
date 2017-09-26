@@ -1,0 +1,91 @@
+---
+title: "hw02"
+author: "Nathan Bendriem"
+date: "September 24, 2017"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+library(gapminder)
+library(tidyverse)
+str(gapminder)
+
+class(gapminder)
+summary(gapminder)
+columns(gapminder)
+ncol(gapminder)
+nrow(gapminder)
+
+Summary(gapminder)
+```{r}
+summary(gapminder)
+```
+mode(gapminder, year)
+```{r}
+hist(gapminder$year)
+```
+```{r}
+summary(gapminder$year)
+```
+```{r}
+summary(gapminder$lifeExp)
+```
+```{r}
+hist(gapminder$lifeExp)
+```
+```{r}
+ggplot(gapminder, aes(x=year, y=lifeExp)) + geom_point(), colour="red"
+p1 <- ggplot(gapminder, aes(x=year, y=gdpPercap))
+```
+
+```{r}
+head(unique(gapminder$year))
+```
+```{r}
+```{r}
+summary(gapminder$year)
+```
+nrow(gapminder$year)
+tail(gapminder$year)
+p1<- ggplot(gapminder, aes(x=year, y=gdpPercap))
+p2<- 
+```{r}
+table(gapminder$year)
+```
+```{r}
+table(gapminder$lifeExp)
+```
+```{r}
+head(gapminder$lifeExp)
+```
+```{r}
+tail(gapminder$lifeExp)
+```
+tail(unique(gapminder$lifeExp))```{r}
+plot(p1)+ coluour="red"
+```
+p1 + geom(alpha=.66)
+```{r}
+p1 + geom_point(alpha=.66, colour="red")
+```
+```{r}
+filter(gapminder, country=="France", year >1960, year <= 1980)
+```
+p3 <- filter(gapminder, country=="France", year >1960, year <=1980)
+
+```{r}
+plot(p3)
+```
+ggplot(p3)
+
+```{r}
+ggplot(p3, aes(x=year, y=pop))+ geom_point()
+```
+```{r}
+```
+hist(gapminder$country)
