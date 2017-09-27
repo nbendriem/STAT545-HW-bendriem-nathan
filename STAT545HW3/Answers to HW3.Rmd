@@ -71,6 +71,8 @@ ggplot(gapminder, aes(x=continent, y=gdpPercap)) + facet_wrap(~continent) + geom
 
 For the second task, I will be answering "Get the maximum and minimum of GDP per capita for all continents"
 
+gapminder %>% group_by(continent) %>% summarize(min_gdpPercap=min(gdpPercap), max_gdpPercap=max(gdpPercap))
+
 ```{r}
 X <- filter(gapminder, year=="2007")
 ```
@@ -78,6 +80,18 @@ X <- filter(gapminder, year=="2007")
 ggplot(X, aes(x=continent, y=gdpPercap)) + geom_boxplot(aes(colour=continent)) + labs(x="2007", y="GDP per Capita") + ggtitle("Min and Max GDP per Capita of all Continents")
 ```
 
+For the last task, I will compute a weighted mean of the life expectancy by population.
+
+```{r}
+Y <- gapminder %>% mutate(lifeExpbypop= pop / lifeExp) %>% filter(year <= "2000", year >= "1980", country=="Norway" | country=="Sweden" | country=="Finland" | country=="Russia" | country=="United States" | country=="Canada" | country=="Denmark" | country=="Iceland") %>% arrange(desc(lifeExpbypop), country, year) %>% select(country, year, lifeExpbypop)
+```
+```{r}
+ggplot(Y, aes(x=year, y=lifeExpbypop)) + geom_point(aes(colour=country))
+```
+
+```{r}
+Y
+```
 
 
 
