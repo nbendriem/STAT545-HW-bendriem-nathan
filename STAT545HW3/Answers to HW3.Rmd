@@ -1,0 +1,75 @@
+---
+title: "HW03"
+author: "Nathan Bendriem"
+date: "September 27, 2017"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+Library(gapminder)
+```{r}
+library(gapminder)
+library(tidyverse)
+```
+
+# Homework 3
+
+For this homework, we will still be using the gapminder dataset, as well as dplyr and ggplot for graphs and tables
+
+
+## We are given a list of tasks, and are asked to pick at least three
+
+- Get the maximum and minimum GDP per capita within the continents
+- look at the spread of GDP per capita within the conitnents
+- Compute a trimmed mean of life expectancy for different years
+- How is life expectancy changing over time on different continents
+
+## Task 1
+
+I will start by answering the task "how is life expectancy changing over time on different continents"
+
+To begin, I will filter the gapminder dataset for each continent by assigning a variable for each continent
+
+```{r}
+A <- filter(gapminder, continent=="Asia")
+```
+```{r}
+B <- filter(gapminder, continent=="Europe")
+```
+```{r}
+C <- filter(gapminder, continent=="Americas")
+```
+```{r}
+D <- filter(gapminder, continent=="Africa")
+```
+```{r}
+E <- filter(gapminder, continent=="Oceania")
+```
+Next, we will create ggplots for each of the 5 continents with year as the X axis and life expectancy as the Y axis.  We will also include a line of best fit to indicate the average
+
+```{r}
+ggplot(A, aes(x=year, y=lifeExp)) + geom_point(aes(colour="red",)) + geom_smooth(se=FALSE, method="lm") + ggtitle("Change in Life Expectancy within Asia") + labs(x="Year", y="Life Expectancy")
+```
+
+```{r}
+ggplot(gapminder, aes(x=year, y=lifeExp)) + facet_wrap(~ continent) +  geom_point(aes(colour=continent)) +  geom_smooth(se=FALSE)
+```
+
+
+```{r}
+ggplot(gapminder, aes(x=continent, y=gdpPercap)) + facet_wrap(~continent) + geom_boxplot(aes(colour="red"))
+```
+
+For the second task, I will be answering "Get the maximum and minimum of GDP per capita for all continents"
+
+```{r}
+X <- filter(gapminder, year=="2007")
+```
+```{r}
+ggplot(X, aes(x=continent, y=gdpPercap)) + geom_boxplot(aes(colour=continent)) + labs(x="2007", y="GDP per Capita") + ggtitle("Min and Max GDP per Capita of all Continents")
+```
+
+
+
+
