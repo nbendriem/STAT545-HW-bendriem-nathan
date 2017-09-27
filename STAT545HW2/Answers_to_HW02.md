@@ -109,10 +109,9 @@ I will explore some various plots using the two variables Year and LifeExp
 
 For this section, I will make a scatterplot of life Expectancy over time (year).  Adding a title was easy, and can be applied to any of th graphs created below. 
 
+
 ```r
-ggplot(gapminder, aes(x=year, y=lifeExp)) + 
-geom_point(size= 1, colour= "red") + 
-ggtitle("Gapminder dataset- LifeExp vs Year")
+ggplot(gapminder, aes(x=year, y=lifeExp)) + geom_point(size= 1, colour= "red") + ggtitle("Gapminder dataset- LifeExp vs Year")
 ```
 
 ![](Answers_to_HW02_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
@@ -121,11 +120,10 @@ ggtitle("Gapminder dataset- LifeExp vs Year")
 
 For this section, I will make a histogram of the life Expectancy from the Gapminder dataset
 
+
+
 ```r
-ggplot(gapminder, aes(gapminder$lifeExp)) + 
-geom_histogram(colour = "black", fill = "red", alpha= 0.33) + 
-labs(x= "Life Expectancy", y= "Frequency") + 
-ggtitle("Histogram of Life Expectancy")
+ggplot(gapminder, aes(gapminder$lifeExp)) + geom_histogram(colour = "black", fill = "red", alpha= 0.33) + labs(x= "Life Expectancy", y= "Frequency") + ggtitle("Histogram of Life Expectancy")
 ```
 
 ```
@@ -138,47 +136,40 @@ ggtitle("Histogram of Life Expectancy")
 
 I started this part of by graphing a boxplot of every country vs the life Expectancy for those countries.  
 
+
 ```r
-ggplot(gapminder, aes(x= country, y= lifeExp)) + 
-geom_boxplot(colour = "red",) + 
-labs(x= "", y= "Life Expectancy") + 
-ggtitle("Boxplot of Life Expectancy vs. Year")
+ggplot(gapminder, aes(x= country, y= lifeExp)) + geom_boxplot(colour = "red",) + labs(x= "", y= "Life Expectancy") + ggtitle("Boxplot of Life Expectancy vs. Year")
 ```
 
 ![](Answers_to_HW02_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
-
 This gives us too many inputs on the x axis (country) so we will do some filtering and focus only on North African Countries.
 
-I will use the filter function to only focus on Algeria, Tunisia, Egypt, Morocco, Libya, and Sudan
 
 ```r
-NorthAfrica <- 
-filter(gapminder, country== "Algeria" | 
-country=="Tunisia" | country=="Egypt" | 
-country=="Morocco" | country=="Libya" | 
-country=="Sudan")
+NorthAfrica <- filter(gapminder, country== "Algeria" | country=="Tunisia" | country=="Egypt" | country=="Morocco" | country=="Libya" | country=="Sudan")
 ```
+
+```r
 ggplot(NorthAfrica, aes(x= country, y= lifeExp)) + geom_boxplot(colour = "black", fill = "red", alpha= 0.33) + labs(x= "Country", y= "Life Expectancy") + ggtitle("Boxplot of Life Expectancy for North African Countries")
+```
+
+![](Answers_to_HW02_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+
 
 One more with Piping, focusing on Oceania and the years 1960-1980
 
 
 ```r
-Oceania<- gapminder %>% 
-filter(continent== "Oceania") %>% 
-filter(year <= 1980, year >= 1960)
+Oceania<- gapminder %>% filter(continent== "Oceania") %>% filter(year <= 1980, year >= 1960)
 ```
 
 
 ```r
-ggplot(Oceania, aes(x= country, y=lifeExp))
-+ geom_boxplot(colour = "black", fill = "blue", alpha =0.33) +
-labs(x= "Country", y="Life Expectancy") + 
-ggtitle("Boxplot of Life Expectancy for Oceania")
+ggplot(Oceania, aes(x= country, y=lifeExp)) + geom_boxplot(colour = "black", fill = "blue", alpha =0.33) +labs(x= "Country", y="Life Expectancy") + ggtitle("Boxplot of Life Expectancy for Oceania")
 ```
 
-![](Answers_to_HW02_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](Answers_to_HW02_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 
 
