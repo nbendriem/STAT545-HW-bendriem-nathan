@@ -51,11 +51,19 @@ Next, we will create ggplots for each of the 5 continents with year as the X axi
 ```{r}
 ggplot(A, aes(x=year, y=lifeExp)) + geom_point(aes(colour="red",)) + geom_smooth(se=FALSE, method="lm") + ggtitle("Change in Life Expectancy within Asia") + labs(x="Year", y="Life Expectancy")
 ```
+```{r}
+select(gapminder, continent, lifeExp)
+```
+```{r}
+gapminder %>% filter(year %in% c("1957", "2007")) %>% select(country, year, lifeExp)
+```
+
 
 ```{r}
 ggplot(gapminder, aes(x=year, y=lifeExp)) + facet_wrap(~ continent) +  geom_point(aes(colour=continent)) +  geom_smooth(se=FALSE)
 ```
 
+gapminder %>% group_by(continent) %>% summarize(min_gdpPercap=min(gdpPercap), max_gdpPercap=max(gdpPercap))
 
 ```{r}
 ggplot(gapminder, aes(x=continent, y=gdpPercap)) + facet_wrap(~continent) + geom_boxplot(aes(colour="red"))
