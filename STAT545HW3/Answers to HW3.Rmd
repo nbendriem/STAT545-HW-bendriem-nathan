@@ -86,7 +86,7 @@ For the last task, I will compute a weighted mean of the life expectancy by popu
 Y <- gapminder %>% mutate(lifeExpbypop= pop / lifeExp) %>% filter(year <= "2000", year >= "1980", country=="Norway" | country=="Sweden" | country=="Finland" | country=="Russia" | country=="United States" | country=="Canada" | country=="Denmark" | country=="Iceland") %>% arrange(desc(lifeExpbypop), country, year) %>% select(country, year, lifeExpbypop)
 ```
 ```{r}
-ggplot(Y, aes(x=year, y=lifeExpbypop)) + geom_point(aes(colour=country))
+ggplot(Y, aes(x=year, y=lifeExpbypop, colour=country)) + geom_smooth(se=FALSE)
 ```
 
 ```{r}
