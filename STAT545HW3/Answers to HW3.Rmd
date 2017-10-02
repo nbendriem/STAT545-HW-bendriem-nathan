@@ -24,73 +24,87 @@ For this homework, we will still be using the gapminder dataset, as well as dply
 - look at the spread of GDP per capita within the conitnents
 - Compute a trimmed mean of life expectancy for different years
 - How is life expectancy changing over time on different continents
+- Report the absolute and/or relative abundance of countries with low life expectancy
+- Or make up your own!
 
 ## Task 1
 
 I will start by answering the task "how is life expectancy changing over time on different continents"
 
-To begin, I will filter the gapminder dataset for each continent by assigning a variable for each continent
-
-```{r}
-A <- filter(gapminder, continent=="Asia")
-```
-```{r}
-B <- filter(gapminder, continent=="Europe")
-```
-```{r}
-C <- filter(gapminder, continent=="Americas")
-```
-```{r}
-D <- filter(gapminder, continent=="Africa")
-```
-```{r}
-E <- filter(gapminder, continent=="Oceania")
-```
-Next, we will create ggplots for each of the 5 continents with year as the X axis and life expectancy as the Y axis.  We will also include a line of best fit to indicate the average
-
-```{r}
-ggplot(A, aes(x=year, y=lifeExp)) + geom_point(aes(colour="red",)) + geom_smooth(se=FALSE, method="lm") + ggtitle("Change in Life Expectancy within Asia") + labs(x="Year", y="Life Expectancy")
-```
-```{r}
-select(gapminder, continent, lifeExp)
-```
-```{r}
-gapminder %>% filter(year %in% c("1957", "2007")) %>% select(country, year, lifeExp)
-```
+To set up the dplyr table, we will be using the select function and the gapminder dataset.  I will only be focusing on the years 1957 and 2007, the first and last years available from the dataset, to illustrate the change in life expectancy
 
 
 ```{r}
-ggplot(gapminder, aes(x=year, y=lifeExp)) + facet_wrap(~ continent) +  geom_point(aes(colour=continent)) +  geom_smooth(se=FALSE)
+A <- gapminder %>% group_by(country) %>% mutate(deltaLifeExp=lifeExp[year==2007]-lifeExp[year==1957]) %>% select(continent, country, deltaLifeExp)
+knitr::kable(A)
+
 ```
 
-gapminder %>% group_by(continent) %>% summarize(min_gdpPercap=min(gdpPercap), max_gdpPercap=max(gdpPercap))
+The table shows us the country as well as the difference between life expectancy from 1957 to 2007.  
+
+To graph this, I will use the facet_wrap function to indicate the 5 continents.  The graphs show the change in life expectancy over time (x-axis).  The geom_smooth function will add a regression line.
 
 ```{r}
-ggplot(gapminder, aes(x=continent, y=gdpPercap)) + facet_wrap(~continent) + geom_boxplot(aes(colour="red"))
+ggplot(gapminder, aes(x=year, y=lifeExp)) + facet_wrap(~ continent) +  geom_point(aes(colour=continent)) + geom_smooth(se=FALSE) + labs(x= "Year", y="Life Expectancy") 
 ```
+
+
+## Second Task
 
 For the second task, I will be answering "Get the maximum and minimum of GDP per capita for all continents"
 
-gapminder %>% group_by(continent) %>% summarize(min_gdpPercap=min(gdpPercap), max_gdpPercap=max(gdpPercap))
+By using the group_by function, and defining the miniumum and maximum gdp per capita using the summarize function, we get a well organized table
+
+G <- gapminder %>% group_by(continent) %>% summarize(min_gdpPercap=min(gdpPercap), max_gdpPercap=max(gdpPercap))
+
+To graph this, I will be using a scatterplot to indicate the minimum and maximm gdp per capita.
 
 ```{r}
-X <- filter(gapminder, year=="2007")
+knitr::kable(G)
 ```
 ```{r}
-ggplot(X, aes(x=continent, y=gdpPercap)) + geom_boxplot(aes(colour=continent)) + labs(x="2007", y="GDP per Capita") + ggtitle("Min and Max GDP per Capita of all Continents")
-```
-
-For the last task, I will compute a weighted mean of the life expectancy by population.
-
-```{r}
-Y <- gapminder %>% mutate(lifeExpbypop= pop / lifeExp) %>% filter(year <= "2000", year >= "1980", country=="Norway" | country=="Sweden" | country=="Finland" | country=="Russia" | country=="United States" | country=="Canada" | country=="Denmark" | country=="Iceland") %>% arrange(desc(lifeExpbypop), country, year) %>% select(country, year, lifeExpbypop)
-```
-```{r}
-ggplot(Y, aes(x=year, y=lifeExpbypop, colour=country)) + geom_smooth(se=FALSE)
+ggplot(G, aes(x=continent, y=min_gdpPercap)) + geom_point(aes(colour=continent)) + labs(x="Continent", y="GDP Per Capita")
 ```
 
+
+
+## Third Task
+
+For the third task, I will compute a trimmed mean of the life expectancy.  First, I decided to filter out some countries.  We will be focusing only on Arctic countries.  We wil also focus on the time span of 1980-2000. 
+
+I used the summarize function to define a new varialbe "mean_lifeExp" which is simply the average life expectancy of the countrys from the years 1980-2000.  I then used the arrange function with descending mean_lifeExp so that the table is organized with the countries that have the lowest average life Expectancy first
+
 ```{r}
-Y
+
+
+Y <- gapminder %>% group_by(country) %>%  filter(year <= "2000", year >= "1980", country=="Norway" | country=="Sweden" | country=="Finland" | country=="Russia" | country=="United States" | country=="Canada" | country=="Denmark" | country=="Iceland") %>% summarize(mean_lifeExp=mean(lifeExp)) %>% arrange(mean_lifeExp, country)
+
+knitr::kable(Y)
+```
+```{r}
+ggplot(Y, aes(x=country, y=mean_lifeExp, colour=country)) + geom_point() + ggtitle("Average Life Expectancy of Arctic Countries (1980-2000)") + labs(x= "Country", y= "Life Expectancy")
+```
+
+
+## Fourth Task
+
+For the final task, I will be looking at countries with low life expectancy and if GDP per capita is an indication of low life expectancy.
+
+I define low life expectancy with an average of 45 years and below.
+
+First I will identify those countries that have an average life expectancy of 45 years and below in the year 2007
+
+```{r}
+M <- gapminder %>% filter(year=="2007", lifeExp <= "45") %>% select(country, lifeExp, gdpPercap)
+
+knitr::kable(M)
+```
+
+Then I will graph the Life Expectancy vs GDP per Capita and add a regression line to see which countries follow the trend and which do not.  
+
+```{r}
+ggplot(M, aes(x=lifeExp, y=gdpPercap)) + geom_point(aes(colour=country)) + labs(x="Life Expectancy", y="GDP Per Capita") + ggtitle("Life Expectancy vs GDP per Capita") 
+
 ```
 
 
