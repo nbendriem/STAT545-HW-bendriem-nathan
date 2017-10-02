@@ -36,6 +36,8 @@ To set up the dplyr table, we will be using the select function and the gapminde
 
 ```{r}
 A <- gapminder %>% group_by(country) %>% mutate(deltaLifeExp=lifeExp[year==2007]-lifeExp[year==1957]) %>% select(continent, country, deltaLifeExp)
+
+
 knitr::kable(A)
 
 ```
@@ -56,12 +58,14 @@ For the second task, I will be answering "Get the maximum and minimum of GDP per
 By using the group_by function, and defining the miniumum and maximum gdp per capita using the summarize function, we get a well organized table
 
 G <- gapminder %>% group_by(continent) %>% summarize(min_gdpPercap=min(gdpPercap), max_gdpPercap=max(gdpPercap))
-
-To graph this, I will be using a scatterplot to indicate the minimum and maximm gdp per capita.
-
 ```{r}
 knitr::kable(G)
 ```
+
+
+To graph this, I will be using a scatterplot to indicate the minimum and maximm gdp per capita.
+
+
 ```{r}
 ggplot(G, aes(x=continent, y=min_gdpPercap)) + geom_point(aes(colour=continent)) + labs(x="Continent", y="GDP Per Capita")
 ```
@@ -84,6 +88,8 @@ knitr::kable(Y)
 ```{r}
 ggplot(Y, aes(x=country, y=mean_lifeExp, colour=country)) + geom_point() + ggtitle("Average Life Expectancy of Arctic Countries (1980-2000)") + labs(x= "Country", y= "Life Expectancy")
 ```
+
+
 
 
 ## Fourth Task
