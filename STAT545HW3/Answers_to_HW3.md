@@ -1771,7 +1771,11 @@ To graph this, I will use the facet_wrap function to indicate the 5 continents. 
 
 
 ```r
-ggplot(gapminder, aes(x=year, y=lifeExp)) + facet_wrap(~ continent) +  geom_point(aes(colour=continent)) + geom_smooth(se=FALSE) + labs(x= "Year", y="Life Expectancy")
+ggplot(gapminder, aes(x=year, y=lifeExp)) + 
+  facet_wrap(~ continent) +  
+  geom_point(aes(colour=continent)) + 
+  geom_smooth(se=FALSE) + 
+  labs(x= "Year", y="Life Expectancy")
 ```
 
 ```
@@ -1790,7 +1794,10 @@ By using the group_by function, and defining the miniumum and maximum gdp per ca
 
 
 ```r
-G <- gapminder %>% group_by(continent) %>% summarize(min_gdpPercap=min(gdpPercap), max_gdpPercap=max(gdpPercap))
+G <- gapminder %>% 
+  group_by(continent) %>% 
+  summarize(min_gdpPercap=min(gdpPercap), 
+            max_gdpPercap=max(gdpPercap))
 ```
 
 
@@ -1814,7 +1821,9 @@ To graph this, I will be using a scatterplot with two layers of "geom_point" to 
 
 
 ```r
-ggplot(G, aes(x=continent)) + geom_point(aes(y=min_gdpPercap,colour=continent)) + geom_point(aes(y=max_gdpPercap, colour=continent)) + labs(x="Continent", y="GDP Per Capita") + ggtitle("Max and Min GDP for All Continents")
+ggplot(G, aes(x=continent)) + geom_point(aes(y=min_gdpPercap,colour=continent)) + geom_point(aes(y=max_gdpPercap, colour=continent)) + 
+  labs(x="Continent", y="GDP Per Capita") +
+  ggtitle("Max and Min GDP for All Continents")
 ```
 
 ![](Answers_to_HW3_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
@@ -1829,7 +1838,10 @@ I used the summarize function to define a new varialbe "mean_lifeExp" which is s
 
 
 ```r
-Y <- gapminder %>% group_by(country) %>%  filter(year <= "2000", year >= "1980", country=="Norway" | country=="Sweden" | country=="Finland" | country=="Russia" | country=="United States" | country=="Canada" | country=="Denmark" | country=="Iceland") %>% summarize(mean_lifeExp=mean(lifeExp)) %>% arrange(mean_lifeExp, country)
+Y <- gapminder %>% group_by(country) %>%  
+  filter(year <= "2000", year >= "1980", country=="Norway" | country=="Sweden" | country=="Finland" | country=="Russia" | country=="United States" | country=="Canada" | country=="Denmark" | country=="Iceland") %>% 
+  summarize(mean_lifeExp=mean(lifeExp)) %>% 
+  arrange(mean_lifeExp, country)
 
 knitr::kable(Y)
 ```
@@ -1848,7 +1860,9 @@ Iceland               77.9850
 
 
 ```r
-ggplot(Y, aes(x=country, y=mean_lifeExp, colour=country, fill=country)) + geom_bar(stat="identity") + ggtitle("Average Life Expectancy of Arctic Countries (1980-2000)") + labs(x="Country", y= "Life Expectancy") +  coord_cartesian(ylim=c(60,80))
+ggplot(Y, aes(x=country, y=mean_lifeExp, colour=country, fill=country)) + geom_bar(stat="identity") + 
+  ggtitle("Average Life Expectancy of Arctic Countries (1980-2000)") + labs(x="Country", y= "Life Expectancy") +  
+  coord_cartesian(ylim=c(60,80))
 ```
 
 ![](Answers_to_HW3_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
@@ -1863,7 +1877,10 @@ First I will identify those countries that have an average life expectancy of 45
 
 
 ```r
-M <- gapminder %>% filter(year=="2007", lifeExp <= "45") %>% select(country, lifeExp, gdpPercap) %>% arrange(lifeExp)
+M <- gapminder %>% 
+  filter(year=="2007", lifeExp <= "45") %>% 
+  select(country, lifeExp, gdpPercap) %>% 
+  arrange(lifeExp)
 
 knitr::kable(M)
 ```
@@ -1886,7 +1903,11 @@ Then I will graph the Life Expectancy vs GDP per Capita and add a regression lin
 
 
 ```r
-ggplot(M, aes(x=lifeExp, y=gdpPercap)) + geom_point(aes(colour=country)) + geom_smooth(method= "glm", alpha=0.33) + labs(x="Life Expectancy", y="GDP Per Capita") + ggtitle("Life Expectancy vs GDP per Capita")
+ggplot(M, aes(x=lifeExp, y=gdpPercap)) + 
+  geom_point(aes(colour=country)) + 
+  geom_smooth(method= "glm", alpha=0.33) + 
+  labs(x="Life Expectancy", y="GDP Per Capita") + 
+  ggtitle("Life Expectancy vs GDP per Capita")
 ```
 
 ![](Answers_to_HW3_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
