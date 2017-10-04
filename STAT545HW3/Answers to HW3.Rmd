@@ -40,7 +40,7 @@ A <- gapminder %>%
   select(continent, country, deltaLifeExp)
 
 
-knitr::kable(A)
+knitr::kable(A, format="markdown")
 
 ```
 
@@ -72,7 +72,7 @@ G <- gapminder %>%
 ```
 
 ```{r}
-knitr::kable(G)
+knitr::kable(G, format="markdown")
 ```
 
 
@@ -101,7 +101,7 @@ Y <- gapminder %>% group_by(country) %>%
   summarize(mean_lifeExp=mean(lifeExp)) %>% 
   arrange(mean_lifeExp, country)
 
-knitr::kable(Y)
+knitr::kable(Y, format="markdown")
 ```
 
 ```{r}
@@ -126,7 +126,7 @@ M <- gapminder %>%
   select(country, lifeExp, gdpPercap) %>% 
   arrange(lifeExp)
 
-knitr::kable(M)
+knitr::kable(M, format="markdown")
 ```
 
 Then I will graph the Life Expectancy vs GDP per Capita and add a regression line to see which countries follow the trend and which do not.  

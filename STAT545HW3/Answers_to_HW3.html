@@ -159,7 +159,7 @@ library(tidyverse)</code></pre>
   select(continent, country, deltaLifeExp)
 
 
-knitr::kable(A)</code></pre>
+knitr::kable(A, format=&quot;markdown&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -8709,7 +8709,7 @@ knitr::kable(A)</code></pre>
   group_by(continent) %&gt;% 
   summarize(min_gdpPercap=min(gdpPercap), 
             max_gdpPercap=max(gdpPercap))</code></pre>
-<pre class="r"><code>knitr::kable(G)</code></pre>
+<pre class="r"><code>knitr::kable(G, format=&quot;markdown&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -8761,7 +8761,7 @@ knitr::kable(A)</code></pre>
   summarize(mean_lifeExp=mean(lifeExp)) %&gt;% 
   arrange(mean_lifeExp, country)
 
-knitr::kable(Y)</code></pre>
+knitr::kable(Y, format=&quot;markdown&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -8815,7 +8815,7 @@ knitr::kable(Y)</code></pre>
   select(country, lifeExp, gdpPercap) %&gt;% 
   arrange(lifeExp)
 
-knitr::kable(M)</code></pre>
+knitr::kable(M, format=&quot;markdown&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
