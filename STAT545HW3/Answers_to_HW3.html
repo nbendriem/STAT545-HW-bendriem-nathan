@@ -159,13 +159,13 @@ library(tidyverse)</code></pre>
   select(continent, country, deltaLifeExp)
 
 
-knitr::kable(A, format=&quot;markdown&quot;)</code></pre>
+knitr::kable(A, format=&quot;markdown&quot;, col.names = c(&quot;Continent&quot;, &quot;Country&quot;, &quot;Change in Life Expectancy&quot;))</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th align="left">continent</th>
-<th align="left">country</th>
-<th align="right">deltaLifeExp</th>
+<th align="left">Continent</th>
+<th align="left">Country</th>
+<th align="right">Change in Life Expectancy</th>
 </tr>
 </thead>
 <tbody>
@@ -8709,13 +8709,13 @@ knitr::kable(A, format=&quot;markdown&quot;)</code></pre>
   group_by(continent) %&gt;% 
   summarize(min_gdpPercap=min(gdpPercap), 
             max_gdpPercap=max(gdpPercap))</code></pre>
-<pre class="r"><code>knitr::kable(G, format=&quot;markdown&quot;)</code></pre>
+<pre class="r"><code>knitr::kable(G, format=&quot;markdown&quot;, col.names = c(&quot;Continent&quot;, &quot;Min GDP&quot;, &quot;Max GDP&quot;))</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th align="left">continent</th>
-<th align="right">min_gdpPercap</th>
-<th align="right">max_gdpPercap</th>
+<th align="left">Continent</th>
+<th align="right">Min GDP</th>
+<th align="right">Max GDP</th>
 </tr>
 </thead>
 <tbody>
@@ -8761,12 +8761,12 @@ knitr::kable(A, format=&quot;markdown&quot;)</code></pre>
   summarize(mean_lifeExp=mean(lifeExp)) %&gt;% 
   arrange(mean_lifeExp, country)
 
-knitr::kable(Y, format=&quot;markdown&quot;)</code></pre>
+knitr::kable(Y, format=&quot;markdown&quot;, col.names = c(&quot;Country&quot;, &quot;Average Life Expectancy&quot;))</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th align="left">country</th>
-<th align="right">mean_lifeExp</th>
+<th align="left">Country</th>
+<th align="right">Average Life Expectancy</th>
 </tr>
 </thead>
 <tbody>
@@ -8815,13 +8815,13 @@ knitr::kable(Y, format=&quot;markdown&quot;)</code></pre>
   select(country, lifeExp, gdpPercap) %&gt;% 
   arrange(lifeExp)
 
-knitr::kable(M, format=&quot;markdown&quot;)</code></pre>
+knitr::kable(M, format=&quot;markdown&quot;, col.names = c(&quot;Country&quot;, &quot;Life Expectancy&quot;, &quot;GDP per Capita&quot;))</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th align="left">country</th>
-<th align="right">lifeExp</th>
-<th align="right">gdpPercap</th>
+<th align="left">Country</th>
+<th align="right">Life Expectancy</th>
+<th align="right">GDP per Capita</th>
 </tr>
 </thead>
 <tbody>
