@@ -57,7 +57,11 @@ For the second task, I will be answering "Get the maximum and minimum of GDP per
 
 By using the group_by function, and defining the miniumum and maximum gdp per capita using the summarize function, we get a well organized table
 
+
+```{r}
 G <- gapminder %>% group_by(continent) %>% summarize(min_gdpPercap=min(gdpPercap), max_gdpPercap=max(gdpPercap))
+```
+
 ```{r}
 knitr::kable(G)
 ```
