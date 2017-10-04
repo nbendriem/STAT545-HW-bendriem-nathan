@@ -154,7 +154,9 @@ library(tidyverse)</code></pre>
 <h2>Task 1</h2>
 <p>I will start by answering the task “how is life expectancy changing over time on different continents”</p>
 <p>To set up the dplyr table, we will be using the select function and the gapminder dataset. I will only be focusing on the years 1957 and 2007, the first and last years available from the dataset, to illustrate the change in life expectancy</p>
-<pre class="r"><code>A &lt;- gapminder %&gt;% group_by(country) %&gt;% mutate(deltaLifeExp=lifeExp[year==2007]-lifeExp[year==1957]) %&gt;% select(continent, country, deltaLifeExp)
+<pre class="r"><code>A &lt;- gapminder %&gt;% 
+  group_by(country) %&gt;% mutate(deltaLifeExp=lifeExp[year==2007]-lifeExp[year==1957]) %&gt;%
+  select(continent, country, deltaLifeExp)
 
 
 knitr::kable(A)</code></pre>

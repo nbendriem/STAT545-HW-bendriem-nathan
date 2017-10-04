@@ -35,7 +35,9 @@ To set up the dplyr table, we will be using the select function and the gapminde
 
 
 ```{r}
-A <- gapminder %>% group_by(country) %>% mutate(deltaLifeExp=lifeExp[year==2007]-lifeExp[year==1957]) %>% select(continent, country, deltaLifeExp)
+A <- gapminder %>% 
+  group_by(country) %>% mutate(deltaLifeExp=lifeExp[year==2007]-lifeExp[year==1957]) %>%
+  select(continent, country, deltaLifeExp)
 
 
 knitr::kable(A)
