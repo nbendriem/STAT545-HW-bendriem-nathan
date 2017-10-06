@@ -1,0 +1,12 @@
+---
+title: "HW04"
+author: "Nathan Bendriem"
+date: "October 6, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##  Homework 4!
