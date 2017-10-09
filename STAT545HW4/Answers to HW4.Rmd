@@ -31,11 +31,11 @@ I will be answering the second activity: make a tibble with one row per year and
 Lets take the 5 countries that are closest to Antarctica and compare their life expectancies.
 
 
-
 ```{r}
-antarctic_countries2 <- gapminder %>% filter(country=="Chile" | country=="Argentina" | country=="South Africa" | country=="Australia" | country=="New Zealand") %>% select(year, country, lifeExp) %>% spread(country, lifeExp)
-
+antarctic_countries <- spread(select(filter(gapminder, country=="Chile" | country=="Argentina" | country=="South Africa" | country=="Australia" | country=="New Zealand"), year, country, lifeExp), country, lifeExp)
 ```
+
+
 
 Here I used the spread function to create a table of 6 Variables measuring life Expectancy for each year listed in the Gapminder Dataset
 
@@ -53,36 +53,43 @@ ggplot(antarctic_countries2) + geom_point(aes(x=Chile, y=Argentina, colour= "Red
 
 ### Join, Merge, Look Up
 
-I created a new data frame of capital cities to complement the countries using Excel and saving it as a .csv file.  
-
-read.csv("~STAT545-HW-bendriem-nathan/STAT545HW4/capital cities2.csv")
+I created two new dataframes with a couple of shark species found in the Pacific Ocean.  
 ```{r}
 setwd("~/Desktop/Stat545: R/STAT545-HWs-Bendriem-Nathan/STAT545HW4")
 
-read.csv("~/capital cities2.csv")
-getwd()
-setwd("~/STAT545-HW-bendriem-nathan/")
+S_LE <- read.csv("~/Desktop/Stat545: R/STAT545-HWs-Bendriem-Nathan/STAT545HW4/shark_lifeExp.csv")
+
+S_Loc <- read.csv("~/Desktop/Stat545: R/STAT545-HWs-Bendriem-Nathan/STAT545HW4/shark_location.csv")
+
 ```
+
+The first dataframe has species, length in meters and life expectancy
 
 ```{r}
-CC <- read.csv("~/Desktop/Stat545: R/STAT545-HWs-Bendriem-Nathan/STAT545HW4/capital cities3.csv")
+kable(S_LE)
 ```
 
-Then I play around with the join functions with the Gapminder and capital cities data frames. 
+The second dataframe has a couple of the same species, and where they are found, whether its coastal, pelagic, or benthic
+
+```{r}
+kable(S_Loc)
+```
+
+Then I play around with the join functions with both data frames. 
 
 # Left and Right Join
 
 Left join will take matching rows from the second variable and add them to the first variable.  Right join will do the inverse and add matching rows from the first variable and add them to the second variable
 
 ```{r}
-left_join(gapminder, CC) %>% filter(year=="2007") %>% kable()
+left_join(S_LE, S_Loc, by="Species") %>% kable()
 ```
-
-
+Here, all species of sharks are presented and those the corresponding location for the sharks found in S_LE and not in S_Loc come up as NA
 ```{r}
-right_join(gapminder, CC) %>% filter(year=="2007") %>% kable()
-
+right_join(S_LE, S_Loc, by="Species") %>% kable()
 ```
+
+As you can see, in the right join, only the species that are found in the S_Loc dataframe are depicted.  
 
 
 # Inner and Full Join
@@ -91,25 +98,49 @@ Inner and Full join will work with rows instead of columns.  Rows with that matc
 
 
 ```{r}
-inner_join(gapminder, CC) %>% filter(year=="1957") %>% kable()
+inner_join(S_LE, S_Loc, by="Species") %>% kable()
 ```
-```{r}
-full_join(gapminder, CC) %>%  filter(year=="2007") %>% kable()
-```
+For inner_join, only the species of sharks found in both dataframes are shown
 
+```{r}
+full_join(S_LE, S_Loc, by="Species") %>% kable()
+```
+Here all species of sharks are shown
 
 # Semi and Anti Join
 
 Semi join does not actually join one column to another data frame but will filter out all rows in the first dataframe that have a match in the second data frame.  Anti join does the opposite and only shows the rows that in the first dataframe that are not matched in the second dataframe
 
 ```{r}
-semi_join(gapminder, CC) %>% filter(year=="1957") %>% kable()
+semi_join(S_LE, S_Loc, by="Species") %>% kable()
 ```
+Here only the sharks found in both dataframes are shown, but since S_LE was the first dataframe, its columns are retained
+
+If we inverse the two dataframes we get this:
+
 ```{r}
-anti_join(gapminder, CC) %>% filter(year=="1957") %>% kable()
+semi_join(S_Loc, S_LE, by="Species") %>% kable()
+```
+Once again, only the sharks found in both dataframes are shown, but the column comes from the S_Loc dataframe since it is the first variable
+
+
+For the anti_join function, only the sharks that are not found in both databases are depicted
+```{r}
+anti_join(S_LE, S_Loc, by="Species") %>% kable()
 ```
 
+# Binding
 
+The binding function will addd either rows (bind_rows) or columns (bind_columns) into a new dataframe
+
+```{r}
+bind_rows(S_LE, S_Loc) %>% kable()
+```
+ 
+```{r}
+bind_cols(S_LE, S_Loc) %>% kable()
+```
+bind columns does not work because the number of rows from each dataframe are not the same.  One has 14, one has 8
 
 
 
