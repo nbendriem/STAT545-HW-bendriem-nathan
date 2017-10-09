@@ -2,13 +2,118 @@
 title: "HW04"
 author: "Nathan Bendriem"
 date: "October 6, 2017"
-output: html_document
+output: 
+  html_document: 
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+library(tidyverse)
+library(gapminder)
+library(tidyr)
+library(knitr)
+
+
 ## Homework 4!
+
+
+This week's homework is another "Pick Your Own Adventure" type where we will be working on our data wrangling skills with some aggregation and reshaping functions.
+
+One of the prompts focuses on data reshaping while the second prompt while  focus on the join functions we have learned last week
+
+### General Data Reshaping and relationship to aggregation
+
+I will be answering the second activity: make a tibble with one row per year and columns for life expectancy for two or more countries.
+
+Lets take the 5 countries that are closest to Antarctica and compare their life expectancies.
+
+
+
+```{r}
+antarctic_countries <- gapminder %>% filter(country=="Chile" | country=="Argentina" | country=="South Africa" | country=="Australia" | country=="New Zealand") %>% select(year, country, lifeExp) %>% spread(country, lifeExp)
+```
+
+Here I used the spread function to create a table of 6 Variables measuring life Expectancy for each year listed in the Gapminder Dataset
+
+I will use tidyr and kable functions to clean up the table, and add a title
+
+
+```{r}
+knitr::kable(antarctic_countries, format="markdown", col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
+```
+Next, we will plot the life Expectancy of Argentina vs that of Chile.  I used the scale_colour_discrete function to take out the title of the legend and rename the dot from "red" to "Life Expectancy"
+
+```{r}
+ggplot(antarctic_countries) + geom_point(aes(x=Chile, y=Argentina, colour= "Red")) + ggtitle("Life Expectancy of Argentina vs Chile") + scale_colour_discrete(name=NULL, labels=c("Life Expectancy"))
+```
+
+### Join, Merge, Look Up
+
+I created a new data frame of capital cities to complement the countries using Excel and saving it as a .csv file.  
+
+read.csv("~STAT545-HW-bendriem-nathan/STAT545HW4/capital cities2.csv")
+```{r}
+setwd("~/Desktop/Stat545: R/STAT545-HWs-Bendriem-Nathan/STAT545HW4")
+
+read.csv("~/capital cities2.csv")
+getwd()
+setwd("~/STAT545-HW-bendriem-nathan/")
+```
+
+```{r}
+CC <- read.csv("~/Desktop/Stat545: R/STAT545-HWs-Bendriem-Nathan/STAT545HW4/capital cities3.csv")
+```
+
+Then I play around with the join functions with the Gapminder and capital cities data frames. 
+
+# Left and Right Join
+
+Left join will take matching rows from the second variable and add them to the first variable.  Right join will do the inverse and add matching rows from the first variable and add them to the second variable
+
+```{r}
+left_join(gapminder, CC) %>% filter(year=="2007") %>% kable()
+```
+
+
+```{r}
+right_join(gapminder, CC) %>% filter(year=="2007") %>% kable()
+
+```
+
+
+# Inner and Full Join
+
+Inner and Full join will work with rows instead of columns.  Rows with that match from both dataframes will be retained with inner join. Full join will retain all rows.  
+
+
+```{r}
+inner_join(gapminder, CC) %>% filter(year=="1957") %>% kable()
+```
+```{r}
+full_join(gapminder, CC) %>%  filter(year=="2007") %>% kable()
+```
+
+
+# Semi and Anti Join
+
+Semi join does not actually join one column to another data frame but will filter out all rows in the first dataframe that have a match in the second data frame.  Anti join does the opposite and only shows the rows that in the first dataframe that are not matched in the second dataframe
+
+```{r}
+semi_join(gapminder, CC) %>% filter(year=="1957") %>% kable()
+```
+```{r}
+anti_join(gapminder, CC) %>% filter(year=="1957") %>% kable()
+```
+
+
+
+
+
+
+
+
 
 
