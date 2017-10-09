@@ -33,7 +33,8 @@ Lets take the 5 countries that are closest to Antarctica and compare their life 
 
 
 ```{r}
-antarctic_countries <- gapminder %>% filter(country=="Chile" | country=="Argentina" | country=="South Africa" | country=="Australia" | country=="New Zealand") %>% select(year, country, lifeExp) %>% spread(country, lifeExp)
+antarctic_countries2 <- gapminder %>% filter(country=="Chile" | country=="Argentina" | country=="South Africa" | country=="Australia" | country=="New Zealand") %>% select(year, country, lifeExp) %>% spread(country, lifeExp)
+
 ```
 
 Here I used the spread function to create a table of 6 Variables measuring life Expectancy for each year listed in the Gapminder Dataset
@@ -42,12 +43,12 @@ I will use tidyr and kable functions to clean up the table, and add a title
 
 
 ```{r}
-knitr::kable(antarctic_countries, format="markdown", col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
+knitr::kable(antarctic_countries2, format="markdown", col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
 ```
 Next, we will plot the life Expectancy of Argentina vs that of Chile.  I used the scale_colour_discrete function to take out the title of the legend and rename the dot from "red" to "Life Expectancy"
 
 ```{r}
-ggplot(antarctic_countries) + geom_point(aes(x=Chile, y=Argentina, colour= "Red")) + ggtitle("Life Expectancy of Argentina vs Chile") + scale_colour_discrete(name=NULL, labels=c("Life Expectancy"))
+ggplot(antarctic_countries2) + geom_point(aes(x=Chile, y=Argentina, colour= "Red")) + ggtitle("Life Expectancy of Argentina vs Chile") + scale_colour_discrete(name=NULL, labels=c("Life Expectancy"))
 ```
 
 ### Join, Merge, Look Up
