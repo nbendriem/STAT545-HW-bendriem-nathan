@@ -39,7 +39,10 @@ Lets take the 5 countries that are closest to Antarctica and compare their life 
 I start off by making a dataframe called antarctic_countries which contains Chile, Argentina, South Africa, Australia, and New Zealand and selecting the life Expectancy and year data from gapminder.  
 
 ```{r}
-antarctic_countries2 <- gapminder %>% filter(country=="Chile" | country=="Argentina" | country=="South Africa" | country=="Australia" | country=="New Zealand") %>% select(year, country, lifeExp) %>% spread(country, lifeExp)
+antarctic_countries2 <- gapminder %>% 
+  filter(country=="Chile" | country=="Argentina" | country=="South Africa" | country=="Australia" | country=="New Zealand") %>% 
+  select(year, country, lifeExp) %>% 
+  spread(country, lifeExp)
 ```
 
 
@@ -49,14 +52,18 @@ I will use tidyr and kable functions to clean up the table, and add a title
 
 
 ```{r}
-knitr::kable(antarctic_countries2, format ="html", col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
+knitr::kable(antarctic_countries2, format ="html", 
+             col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), 
+             caption="Life Expectancy of Antarctic Countries")
 ```
 
 
 Next, we will plot the life Expectancy of Argentina vs that of Chile.  I used the scale_colour_discrete function to take out the title of the legend and rename the dot from "red" to "Life Expectancy"
 
 ```{r}
-ggplot(antarctic_countries2) + geom_point(aes(x=Chile, y=Argentina, colour= "Red")) + ggtitle("Life Expectancy of Argentina vs Chile") + scale_colour_discrete(name=NULL, labels=c("Life Expectancy"))
+ggplot(antarctic_countries2) + 
+  geom_point(aes(x=Chile, y=Argentina, colour= "Red")) + 
+  ggtitle("Life Expectancy of Argentina vs Chile") + scale_colour_discrete(name=NULL, labels=c("Life Expectancy"))
 ```
 
 ## Part 2
@@ -114,14 +121,14 @@ Full join will retain all rows regardless of if it has a match in both dataframe
 For inner_join, only the species of sharks found in both dataframes are shown
 
 ```{r}
-inner_join(S_LE, S_Loc, by="Species") %>% kable()
+inner_join(S_LE, S_Loc, by="Species") %>% kable(format="html")
 ```
 
 
 If using full join, all species of sharks are shown and all columns are shown as well.  NAs signify missing data from the S_Loc dataframe where the species of shark was not included in the dataframe
 
 ```{r}
-full_join(S_LE, S_Loc, by="Species") %>% kable()
+full_join(S_LE, S_Loc, by="Species") %>% kable(format="html")
 ```
 
 
@@ -130,7 +137,7 @@ full_join(S_LE, S_Loc, by="Species") %>% kable()
 Semi join does not actually join one column to another data frame but will filter out all rows in the first dataframe that have a match in the second data frame.  Anti join does the opposite and only shows the rows that in the first dataframe that are not matched in the second dataframe
 
 ```{r}
-semi_join(S_LE, S_Loc, by="Species") %>% kable()
+semi_join(S_LE, S_Loc, by="Species") %>% kable(format="html")
 ```
 
 Here only the sharks found in both dataframes are shown, but since S_LE was the first dataframe, its columns are retained
@@ -139,7 +146,7 @@ Here only the sharks found in both dataframes are shown, but since S_LE was the 
 If we inverse the two dataframes we get this:
 
 ```{r}
-semi_join(S_Loc, S_LE, by="Species") %>% kable()
+semi_join(S_Loc, S_LE, by="Species") %>% kable(format="html")
 ```
 
 Once again, only the sharks found in both dataframes are shown, but the column comes from the S_Loc dataframe since it is the first variable
@@ -149,7 +156,7 @@ Once again, only the sharks found in both dataframes are shown, but the column c
 For the anti_join function, only the sharks that are not found in both databases are depicted
 
 ```{r}
-anti_join(S_LE, S_Loc, by="Species") %>% kable()
+anti_join(S_LE, S_Loc, by="Species") %>% kable(format="html")
 ```
 
 # Binding
@@ -159,7 +166,7 @@ The binding function will addd either rows (bind_rows) or columns (bind_columns)
 By binding rows, I am adding all shark species and some will be duplicated if they are found in both dataframes
 
 ```{r}
-bind_rows(S_LE, S_Loc) %>% kable()
+bind_rows(S_LE, S_Loc) %>% kable(format="html")
 ```
 
 Bind columns requires that each dataframe have the same number of rows or else it does not work.  In this case, S_LE has 14 observations and S_LOC has 8 so bind.columns will not work.

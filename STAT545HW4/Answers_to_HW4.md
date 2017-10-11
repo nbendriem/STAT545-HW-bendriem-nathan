@@ -32,7 +32,10 @@ I start off by making a dataframe called antarctic_countries which contains Chil
 
 
 ```r
-antarctic_countries2 <- gapminder %>% filter(country=="Chile" | country=="Argentina" | country=="South Africa" | country=="Australia" | country=="New Zealand") %>% select(year, country, lifeExp) %>% spread(country, lifeExp)
+antarctic_countries2 <- gapminder %>% 
+  filter(country=="Chile" | country=="Argentina" | country=="South Africa" | country=="Australia" | country=="New Zealand") %>% 
+  select(year, country, lifeExp) %>% 
+  spread(country, lifeExp)
 ```
 
 
@@ -43,7 +46,9 @@ I will use tidyr and kable functions to clean up the table, and add a title
 
 
 ```r
-knitr::kable(antarctic_countries2, format ="html", col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
+knitr::kable(antarctic_countries2, format ="html", 
+             col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), 
+             caption="Life Expectancy of Antarctic Countries")
 ```
 
 <table>
@@ -163,7 +168,9 @@ Next, we will plot the life Expectancy of Argentina vs that of Chile.  I used th
 
 
 ```r
-ggplot(antarctic_countries2) + geom_point(aes(x=Chile, y=Argentina, colour= "Red")) + ggtitle("Life Expectancy of Argentina vs Chile") + scale_colour_discrete(name=NULL, labels=c("Life Expectancy"))
+ggplot(antarctic_countries2) + 
+  geom_point(aes(x=Chile, y=Argentina, colour= "Red")) + 
+  ggtitle("Life Expectancy of Argentina vs Chile") + scale_colour_discrete(name=NULL, labels=c("Life Expectancy"))
 ```
 
 ![](Answers_to_HW4_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
@@ -521,7 +528,7 @@ For inner_join, only the species of sharks found in both dataframes are shown
 
 
 ```r
-inner_join(S_LE, S_Loc, by="Species") %>% kable()
+inner_join(S_LE, S_Loc, by="Species") %>% kable(format="html")
 ```
 
 ```
@@ -529,25 +536,73 @@ inner_join(S_LE, S_Loc, by="Species") %>% kable()
 ## to character vector
 ```
 
-
-
-Species          Length..m.   LifeExp  Location 
---------------  -----------  --------  ---------
-Frilled                2.00        25  Benthic  
-Sixgill                4.80        80  Benthic  
-Spiny Dogfish          1.20        70  Coastal  
-Horn                   1.00        35  Coastal  
-Whale                 12.65        30  Pelagic  
-Basking               10.00        50  Pelagic  
-Mako                   4.00        35  Pelagic  
-Great White            6.40        70  Pelagic  
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Species </th>
+   <th style="text-align:right;"> Length..m. </th>
+   <th style="text-align:right;"> LifeExp </th>
+   <th style="text-align:left;"> Location </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Frilled </td>
+   <td style="text-align:right;"> 2.00 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sixgill </td>
+   <td style="text-align:right;"> 4.80 </td>
+   <td style="text-align:right;"> 80 </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spiny Dogfish </td>
+   <td style="text-align:right;"> 1.20 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Horn </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Whale </td>
+   <td style="text-align:right;"> 12.65 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Basking </td>
+   <td style="text-align:right;"> 10.00 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mako </td>
+   <td style="text-align:right;"> 4.00 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Great White </td>
+   <td style="text-align:right;"> 6.40 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+</tbody>
+</table>
 
 
 If using full join, all species of sharks are shown and all columns are shown as well.  NAs signify missing data from the S_Loc dataframe where the species of shark was not included in the dataframe
 
 
 ```r
-full_join(S_LE, S_Loc, by="Species") %>% kable()
+full_join(S_LE, S_Loc, by="Species") %>% kable(format="html")
 ```
 
 ```
@@ -555,24 +610,102 @@ full_join(S_LE, S_Loc, by="Species") %>% kable()
 ## to character vector
 ```
 
-
-
-Species                Length..m.   LifeExp  Location 
---------------------  -----------  --------  ---------
-Frilled                      2.00        25  Benthic  
-Sevengill                    3.00        50  NA       
-Sixgill                      4.80        80  Benthic  
-Prickly                      4.00        30  NA       
-Spiny Dogfish                1.20        70  Coastal  
-Pygmy                        0.28        45  NA       
-Pacific Angel Shark          1.50        25  NA       
-Horn                         1.00        35  Coastal  
-Whale                       12.65        30  Pelagic  
-Nurse                        2.20        25  NA       
-Thresher                     6.10        22  NA       
-Basking                     10.00        50  Pelagic  
-Mako                         4.00        35  Pelagic  
-Great White                  6.40        70  Pelagic  
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Species </th>
+   <th style="text-align:right;"> Length..m. </th>
+   <th style="text-align:right;"> LifeExp </th>
+   <th style="text-align:left;"> Location </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Frilled </td>
+   <td style="text-align:right;"> 2.00 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sevengill </td>
+   <td style="text-align:right;"> 3.00 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sixgill </td>
+   <td style="text-align:right;"> 4.80 </td>
+   <td style="text-align:right;"> 80 </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Prickly </td>
+   <td style="text-align:right;"> 4.00 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spiny Dogfish </td>
+   <td style="text-align:right;"> 1.20 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pygmy </td>
+   <td style="text-align:right;"> 0.28 </td>
+   <td style="text-align:right;"> 45 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pacific Angel Shark </td>
+   <td style="text-align:right;"> 1.50 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Horn </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Whale </td>
+   <td style="text-align:right;"> 12.65 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Nurse </td>
+   <td style="text-align:right;"> 2.20 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Thresher </td>
+   <td style="text-align:right;"> 6.10 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Basking </td>
+   <td style="text-align:right;"> 10.00 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mako </td>
+   <td style="text-align:right;"> 4.00 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Great White </td>
+   <td style="text-align:right;"> 6.40 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+</tbody>
+</table>
 
 
 # Semi and Anti Join
@@ -581,7 +714,7 @@ Semi join does not actually join one column to another data frame but will filte
 
 
 ```r
-semi_join(S_LE, S_Loc, by="Species") %>% kable()
+semi_join(S_LE, S_Loc, by="Species") %>% kable(format="html")
 ```
 
 ```
@@ -589,18 +722,57 @@ semi_join(S_LE, S_Loc, by="Species") %>% kable()
 ## to character vector
 ```
 
-
-
-Species          Length..m.   LifeExp
---------------  -----------  --------
-Frilled                2.00        25
-Sixgill                4.80        80
-Spiny Dogfish          1.20        70
-Horn                   1.00        35
-Whale                 12.65        30
-Basking               10.00        50
-Mako                   4.00        35
-Great White            6.40        70
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Species </th>
+   <th style="text-align:right;"> Length..m. </th>
+   <th style="text-align:right;"> LifeExp </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Frilled </td>
+   <td style="text-align:right;"> 2.00 </td>
+   <td style="text-align:right;"> 25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sixgill </td>
+   <td style="text-align:right;"> 4.80 </td>
+   <td style="text-align:right;"> 80 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spiny Dogfish </td>
+   <td style="text-align:right;"> 1.20 </td>
+   <td style="text-align:right;"> 70 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Horn </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Whale </td>
+   <td style="text-align:right;"> 12.65 </td>
+   <td style="text-align:right;"> 30 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Basking </td>
+   <td style="text-align:right;"> 10.00 </td>
+   <td style="text-align:right;"> 50 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mako </td>
+   <td style="text-align:right;"> 4.00 </td>
+   <td style="text-align:right;"> 35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Great White </td>
+   <td style="text-align:right;"> 6.40 </td>
+   <td style="text-align:right;"> 70 </td>
+  </tr>
+</tbody>
+</table>
 
 Here only the sharks found in both dataframes are shown, but since S_LE was the first dataframe, its columns are retained
 
@@ -609,7 +781,7 @@ If we inverse the two dataframes we get this:
 
 
 ```r
-semi_join(S_Loc, S_LE, by="Species") %>% kable()
+semi_join(S_Loc, S_LE, by="Species") %>% kable(format="html")
 ```
 
 ```
@@ -617,18 +789,48 @@ semi_join(S_Loc, S_LE, by="Species") %>% kable()
 ## to character vector
 ```
 
-
-
-Species         Location 
---------------  ---------
-Horn            Coastal  
-Frilled         Benthic  
-Spiny Dogfish   Coastal  
-Whale           Pelagic  
-Great White     Pelagic  
-Mako            Pelagic  
-Basking         Pelagic  
-Sixgill         Benthic  
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Species </th>
+   <th style="text-align:left;"> Location </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Horn </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Frilled </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spiny Dogfish </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Whale </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Great White </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mako </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Basking </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sixgill </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+</tbody>
+</table>
 
 Once again, only the sharks found in both dataframes are shown, but the column comes from the S_Loc dataframe since it is the first variable
 
@@ -638,7 +840,7 @@ For the anti_join function, only the sharks that are not found in both databases
 
 
 ```r
-anti_join(S_LE, S_Loc, by="Species") %>% kable()
+anti_join(S_LE, S_Loc, by="Species") %>% kable(format="html")
 ```
 
 ```
@@ -646,16 +848,47 @@ anti_join(S_LE, S_Loc, by="Species") %>% kable()
 ## to character vector
 ```
 
-
-
-Species                Length..m.   LifeExp
---------------------  -----------  --------
-Sevengill                    3.00        50
-Prickly                      4.00        30
-Pygmy                        0.28        45
-Pacific Angel Shark          1.50        25
-Nurse                        2.20        25
-Thresher                     6.10        22
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Species </th>
+   <th style="text-align:right;"> Length..m. </th>
+   <th style="text-align:right;"> LifeExp </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Sevengill </td>
+   <td style="text-align:right;"> 3.00 </td>
+   <td style="text-align:right;"> 50 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Prickly </td>
+   <td style="text-align:right;"> 4.00 </td>
+   <td style="text-align:right;"> 30 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pygmy </td>
+   <td style="text-align:right;"> 0.28 </td>
+   <td style="text-align:right;"> 45 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pacific Angel Shark </td>
+   <td style="text-align:right;"> 1.50 </td>
+   <td style="text-align:right;"> 25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Nurse </td>
+   <td style="text-align:right;"> 2.20 </td>
+   <td style="text-align:right;"> 25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Thresher </td>
+   <td style="text-align:right;"> 6.10 </td>
+   <td style="text-align:right;"> 22 </td>
+  </tr>
+</tbody>
+</table>
 
 # Binding
 
@@ -665,7 +898,7 @@ By binding rows, I am adding all shark species and some will be duplicated if th
 
 
 ```r
-bind_rows(S_LE, S_Loc) %>% kable()
+bind_rows(S_LE, S_Loc) %>% kable(format="html")
 ```
 
 ```
@@ -680,32 +913,150 @@ bind_rows(S_LE, S_Loc) %>% kable()
 ## coercing into character vector
 ```
 
-
-
-Species                Length..m.   LifeExp  Location 
---------------------  -----------  --------  ---------
-Frilled                      2.00        25  NA       
-Sevengill                    3.00        50  NA       
-Sixgill                      4.80        80  NA       
-Prickly                      4.00        30  NA       
-Spiny Dogfish                1.20        70  NA       
-Pygmy                        0.28        45  NA       
-Pacific Angel Shark          1.50        25  NA       
-Horn                         1.00        35  NA       
-Whale                       12.65        30  NA       
-Nurse                        2.20        25  NA       
-Thresher                     6.10        22  NA       
-Basking                     10.00        50  NA       
-Mako                         4.00        35  NA       
-Great White                  6.40        70  NA       
-Horn                           NA        NA  Coastal  
-Frilled                        NA        NA  Benthic  
-Spiny Dogfish                  NA        NA  Coastal  
-Whale                          NA        NA  Pelagic  
-Great White                    NA        NA  Pelagic  
-Mako                           NA        NA  Pelagic  
-Basking                        NA        NA  Pelagic  
-Sixgill                        NA        NA  Benthic  
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Species </th>
+   <th style="text-align:right;"> Length..m. </th>
+   <th style="text-align:right;"> LifeExp </th>
+   <th style="text-align:left;"> Location </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Frilled </td>
+   <td style="text-align:right;"> 2.00 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sevengill </td>
+   <td style="text-align:right;"> 3.00 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sixgill </td>
+   <td style="text-align:right;"> 4.80 </td>
+   <td style="text-align:right;"> 80 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Prickly </td>
+   <td style="text-align:right;"> 4.00 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spiny Dogfish </td>
+   <td style="text-align:right;"> 1.20 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pygmy </td>
+   <td style="text-align:right;"> 0.28 </td>
+   <td style="text-align:right;"> 45 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pacific Angel Shark </td>
+   <td style="text-align:right;"> 1.50 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Horn </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Whale </td>
+   <td style="text-align:right;"> 12.65 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Nurse </td>
+   <td style="text-align:right;"> 2.20 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Thresher </td>
+   <td style="text-align:right;"> 6.10 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Basking </td>
+   <td style="text-align:right;"> 10.00 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mako </td>
+   <td style="text-align:right;"> 4.00 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Great White </td>
+   <td style="text-align:right;"> 6.40 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Horn </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Frilled </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spiny Dogfish </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Whale </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Great White </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mako </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Basking </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sixgill </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+</tbody>
+</table>
 
 Bind columns requires that each dataframe have the same number of rows or else it does not work.  In this case, S_LE has 14 observations and S_LOC has 8 so bind.columns will not work.
 
