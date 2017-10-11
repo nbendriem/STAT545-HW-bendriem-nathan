@@ -7,14 +7,18 @@ output:
     keep_md: yes
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, warning=FALSE, message=FALSE, results='hide', echo=FALSE, cache=FALSE}
+
 knitr::opts_chunk$set(echo = TRUE)
+suppressPackageStartupMessages(library(tidyverse))
 ```
 
+```{r}
 library(tidyverse)
 library(gapminder)
 library(tidyr)
 library(knitr)
+```
 
 
 ## Homework 4!
@@ -24,17 +28,19 @@ This week's homework is another "Pick Your Own Adventure" type where we will be 
 
 One of the prompts focuses on data reshaping while the second prompt while  focus on the join functions we have learned last week
 
+## Part 1
+
 ### General Data Reshaping and relationship to aggregation
 
 I will be answering the second activity: make a tibble with one row per year and columns for life expectancy for two or more countries.
 
 Lets take the 5 countries that are closest to Antarctica and compare their life expectancies.
 
+I start off by making a dataframe called antarctic_countries which contains Chile, Argentina, South Africa, Australia, and New Zealand and selecting the life Expectancy and year data from gapminder.  
 
 ```{r}
-antarctic_countries <- spread(select(filter(gapminder, country=="Chile" | country=="Argentina" | country=="South Africa" | country=="Australia" | country=="New Zealand"), year, country, lifeExp), country, lifeExp)
+antarctic_countries2 <- gapminder %>% filter(country=="Chile" | country=="Argentina" | country=="South Africa" | country=="Australia" | country=="New Zealand") %>% select(year, country, lifeExp) %>% spread(country, lifeExp)
 ```
-
 
 
 Here I used the spread function to create a table of 6 Variables measuring life Expectancy for each year listed in the Gapminder Dataset
@@ -43,17 +49,22 @@ I will use tidyr and kable functions to clean up the table, and add a title
 
 
 ```{r}
-knitr::kable(antarctic_countries2, format="markdown", col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
+knitr::kable(antarctic_countries2, col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
 ```
+
+
 Next, we will plot the life Expectancy of Argentina vs that of Chile.  I used the scale_colour_discrete function to take out the title of the legend and rename the dot from "red" to "Life Expectancy"
 
 ```{r}
 ggplot(antarctic_countries2) + geom_point(aes(x=Chile, y=Argentina, colour= "Red")) + ggtitle("Life Expectancy of Argentina vs Chile") + scale_colour_discrete(name=NULL, labels=c("Life Expectancy"))
 ```
 
+## Part 2
+
 ### Join, Merge, Look Up
 
-I created two new dataframes with a couple of shark species found in the Pacific Ocean.  
+I created two new dataframes with a couple of shark species found in the Pacific Ocean and uploaded them to R studio using the read.csv function 
+
 ```{r}
 setwd("~/Desktop/Stat545: R/STAT545-HWs-Bendriem-Nathan/STAT545HW4")
 
@@ -84,7 +95,9 @@ Left join will take matching rows from the second variable and add them to the f
 ```{r}
 left_join(S_LE, S_Loc, by="Species") %>% kable()
 ```
-Here, all species of sharks are presented and those the corresponding location for the sharks found in S_LE and not in S_Loc come up as NA
+
+Here, all species of sharks are presented and those the corresponding location for the sharks found in S_LE and not in S_Loc come up as "NA"
+
 ```{r}
 right_join(S_LE, S_Loc, by="Species") %>% kable()
 ```
@@ -94,18 +107,23 @@ As you can see, in the right join, only the species that are found in the S_Loc 
 
 # Inner and Full Join
 
-Inner and Full join will work with rows instead of columns.  Rows with that match from both dataframes will be retained with inner join. Full join will retain all rows.  
+Inner and Full join will work with rows instead of columns.  Rows that match from both dataframes will be retained with inner join and those that are not found in both dataframes are not shown. 
 
+Full join will retain all rows regardless of if it has a match in both dataframes.  
+
+For inner_join, only the species of sharks found in both dataframes are shown
 
 ```{r}
 inner_join(S_LE, S_Loc, by="Species") %>% kable()
 ```
-For inner_join, only the species of sharks found in both dataframes are shown
+
+
+If using full join, all species of sharks are shown and all columns are shown as well.  NAs signify missing data from the S_Loc dataframe where the species of shark was not included in the dataframe
 
 ```{r}
 full_join(S_LE, S_Loc, by="Species") %>% kable()
 ```
-Here all species of sharks are shown
+
 
 # Semi and Anti Join
 
@@ -114,17 +132,22 @@ Semi join does not actually join one column to another data frame but will filte
 ```{r}
 semi_join(S_LE, S_Loc, by="Species") %>% kable()
 ```
+
 Here only the sharks found in both dataframes are shown, but since S_LE was the first dataframe, its columns are retained
+
 
 If we inverse the two dataframes we get this:
 
 ```{r}
 semi_join(S_Loc, S_LE, by="Species") %>% kable()
 ```
+
 Once again, only the sharks found in both dataframes are shown, but the column comes from the S_Loc dataframe since it is the first variable
 
 
+
 For the anti_join function, only the sharks that are not found in both databases are depicted
+
 ```{r}
 anti_join(S_LE, S_Loc, by="Species") %>% kable()
 ```
@@ -133,14 +156,27 @@ anti_join(S_LE, S_Loc, by="Species") %>% kable()
 
 The binding function will addd either rows (bind_rows) or columns (bind_columns) into a new dataframe
 
+By binding rows, I am adding all shark species and some will be duplicated if they are found in both dataframes
+
 ```{r}
 bind_rows(S_LE, S_Loc) %>% kable()
 ```
- 
-```{r}
-bind_cols(S_LE, S_Loc) %>% kable()
-```
-bind columns does not work because the number of rows from each dataframe are not the same.  One has 14, one has 8
+
+Bind columns requires that each dataframe have the same number of rows or else it does not work.  In this case, S_LE has 14 observations and S_LOC has 8 so bind.columns will not work.
+
+
+## Reflection on the Homework
+
+For the first part of the homework, I relied mostly on the class notes and a little trial and error on creating the ggplot.  
+
+The second part of the homework took much longer to complete, but mostly because we have not had much work with the join and binding functions yet.  
+Uploading the new dataframes was difficult as I had to pinpoint the right working directory before it would upload. 
+
+In terms of the join functions, I relied heavily on the data wrangling cheatsheet found [here](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+I am still having trouble hiding the library code chunk at the top of the page if anyone could help me out with that!  I have tried include=FALSE, warning=FALSE, message=FALSE, results='hide', echo=FALSE, cache=FALSE with no luck....
+
+
 
 
 
