@@ -9,8 +9,9 @@ output:
 
 ```{r setup, include=FALSE, warning=FALSE, message=FALSE, results='hide', echo=FALSE, cache=FALSE}
 
+
 knitr::opts_chunk$set(echo = TRUE)
-suppressPackageStartupMessages(library(tidyverse))
+
 ```
 
 ```{r}
