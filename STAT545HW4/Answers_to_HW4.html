@@ -142,115 +142,273 @@ library(knitr)</code></pre>
 <pre class="r"><code>antarctic_countries2 &lt;- gapminder %&gt;% filter(country==&quot;Chile&quot; | country==&quot;Argentina&quot; | country==&quot;South Africa&quot; | country==&quot;Australia&quot; | country==&quot;New Zealand&quot;) %&gt;% select(year, country, lifeExp) %&gt;% spread(country, lifeExp)</code></pre>
 <p>Here I used the spread function to create a table of 6 Variables measuring life Expectancy for each year listed in the Gapminder Dataset</p>
 <p>I will use tidyr and kable functions to clean up the table, and add a title</p>
-<pre class="r"><code>knitr::kable(antarctic_countries2, col.names=c(&quot;Year&quot;, &quot;Argentina&quot;, &quot;Australia&quot;, &quot;Chile&quot;, &quot;New Zealand&quot;, &quot;South Africa&quot;), caption=&quot;Life Expectancy of Antarctic Countries&quot;)</code></pre>
+<pre class="r"><code>knitr::kable(antarctic_countries2, format =&quot;html&quot;, col.names=c(&quot;Year&quot;, &quot;Argentina&quot;, &quot;Australia&quot;, &quot;Chile&quot;, &quot;New Zealand&quot;, &quot;South Africa&quot;), caption=&quot;Life Expectancy of Antarctic Countries&quot;)</code></pre>
 <table>
-<caption>Life Expectancy of Antarctic Countries</caption>
+<caption>
+Life Expectancy of Antarctic Countries
+</caption>
 <thead>
-<tr class="header">
-<th align="right">Year</th>
-<th align="right">Argentina</th>
-<th align="right">Australia</th>
-<th align="right">Chile</th>
-<th align="right">New Zealand</th>
-<th align="right">South Africa</th>
+<tr>
+<th style="text-align:right;">
+Year
+</th>
+<th style="text-align:right;">
+Argentina
+</th>
+<th style="text-align:right;">
+Australia
+</th>
+<th style="text-align:right;">
+Chile
+</th>
+<th style="text-align:right;">
+New Zealand
+</th>
+<th style="text-align:right;">
+South Africa
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">1952</td>
-<td align="right">62.485</td>
-<td align="right">69.120</td>
-<td align="right">54.745</td>
-<td align="right">69.390</td>
-<td align="right">45.009</td>
+<tr>
+<td style="text-align:right;">
+1952
+</td>
+<td style="text-align:right;">
+62.485
+</td>
+<td style="text-align:right;">
+69.120
+</td>
+<td style="text-align:right;">
+54.745
+</td>
+<td style="text-align:right;">
+69.390
+</td>
+<td style="text-align:right;">
+45.009
+</td>
 </tr>
-<tr class="even">
-<td align="right">1957</td>
-<td align="right">64.399</td>
-<td align="right">70.330</td>
-<td align="right">56.074</td>
-<td align="right">70.260</td>
-<td align="right">47.985</td>
+<tr>
+<td style="text-align:right;">
+1957
+</td>
+<td style="text-align:right;">
+64.399
+</td>
+<td style="text-align:right;">
+70.330
+</td>
+<td style="text-align:right;">
+56.074
+</td>
+<td style="text-align:right;">
+70.260
+</td>
+<td style="text-align:right;">
+47.985
+</td>
 </tr>
-<tr class="odd">
-<td align="right">1962</td>
-<td align="right">65.142</td>
-<td align="right">70.930</td>
-<td align="right">57.924</td>
-<td align="right">71.240</td>
-<td align="right">49.951</td>
+<tr>
+<td style="text-align:right;">
+1962
+</td>
+<td style="text-align:right;">
+65.142
+</td>
+<td style="text-align:right;">
+70.930
+</td>
+<td style="text-align:right;">
+57.924
+</td>
+<td style="text-align:right;">
+71.240
+</td>
+<td style="text-align:right;">
+49.951
+</td>
 </tr>
-<tr class="even">
-<td align="right">1967</td>
-<td align="right">65.634</td>
-<td align="right">71.100</td>
-<td align="right">60.523</td>
-<td align="right">71.520</td>
-<td align="right">51.927</td>
+<tr>
+<td style="text-align:right;">
+1967
+</td>
+<td style="text-align:right;">
+65.634
+</td>
+<td style="text-align:right;">
+71.100
+</td>
+<td style="text-align:right;">
+60.523
+</td>
+<td style="text-align:right;">
+71.520
+</td>
+<td style="text-align:right;">
+51.927
+</td>
 </tr>
-<tr class="odd">
-<td align="right">1972</td>
-<td align="right">67.065</td>
-<td align="right">71.930</td>
-<td align="right">63.441</td>
-<td align="right">71.890</td>
-<td align="right">53.696</td>
+<tr>
+<td style="text-align:right;">
+1972
+</td>
+<td style="text-align:right;">
+67.065
+</td>
+<td style="text-align:right;">
+71.930
+</td>
+<td style="text-align:right;">
+63.441
+</td>
+<td style="text-align:right;">
+71.890
+</td>
+<td style="text-align:right;">
+53.696
+</td>
 </tr>
-<tr class="even">
-<td align="right">1977</td>
-<td align="right">68.481</td>
-<td align="right">73.490</td>
-<td align="right">67.052</td>
-<td align="right">72.220</td>
-<td align="right">55.527</td>
+<tr>
+<td style="text-align:right;">
+1977
+</td>
+<td style="text-align:right;">
+68.481
+</td>
+<td style="text-align:right;">
+73.490
+</td>
+<td style="text-align:right;">
+67.052
+</td>
+<td style="text-align:right;">
+72.220
+</td>
+<td style="text-align:right;">
+55.527
+</td>
 </tr>
-<tr class="odd">
-<td align="right">1982</td>
-<td align="right">69.942</td>
-<td align="right">74.740</td>
-<td align="right">70.565</td>
-<td align="right">73.840</td>
-<td align="right">58.161</td>
+<tr>
+<td style="text-align:right;">
+1982
+</td>
+<td style="text-align:right;">
+69.942
+</td>
+<td style="text-align:right;">
+74.740
+</td>
+<td style="text-align:right;">
+70.565
+</td>
+<td style="text-align:right;">
+73.840
+</td>
+<td style="text-align:right;">
+58.161
+</td>
 </tr>
-<tr class="even">
-<td align="right">1987</td>
-<td align="right">70.774</td>
-<td align="right">76.320</td>
-<td align="right">72.492</td>
-<td align="right">74.320</td>
-<td align="right">60.834</td>
+<tr>
+<td style="text-align:right;">
+1987
+</td>
+<td style="text-align:right;">
+70.774
+</td>
+<td style="text-align:right;">
+76.320
+</td>
+<td style="text-align:right;">
+72.492
+</td>
+<td style="text-align:right;">
+74.320
+</td>
+<td style="text-align:right;">
+60.834
+</td>
 </tr>
-<tr class="odd">
-<td align="right">1992</td>
-<td align="right">71.868</td>
-<td align="right">77.560</td>
-<td align="right">74.126</td>
-<td align="right">76.330</td>
-<td align="right">61.888</td>
+<tr>
+<td style="text-align:right;">
+1992
+</td>
+<td style="text-align:right;">
+71.868
+</td>
+<td style="text-align:right;">
+77.560
+</td>
+<td style="text-align:right;">
+74.126
+</td>
+<td style="text-align:right;">
+76.330
+</td>
+<td style="text-align:right;">
+61.888
+</td>
 </tr>
-<tr class="even">
-<td align="right">1997</td>
-<td align="right">73.275</td>
-<td align="right">78.830</td>
-<td align="right">75.816</td>
-<td align="right">77.550</td>
-<td align="right">60.236</td>
+<tr>
+<td style="text-align:right;">
+1997
+</td>
+<td style="text-align:right;">
+73.275
+</td>
+<td style="text-align:right;">
+78.830
+</td>
+<td style="text-align:right;">
+75.816
+</td>
+<td style="text-align:right;">
+77.550
+</td>
+<td style="text-align:right;">
+60.236
+</td>
 </tr>
-<tr class="odd">
-<td align="right">2002</td>
-<td align="right">74.340</td>
-<td align="right">80.370</td>
-<td align="right">77.860</td>
-<td align="right">79.110</td>
-<td align="right">53.365</td>
+<tr>
+<td style="text-align:right;">
+2002
+</td>
+<td style="text-align:right;">
+74.340
+</td>
+<td style="text-align:right;">
+80.370
+</td>
+<td style="text-align:right;">
+77.860
+</td>
+<td style="text-align:right;">
+79.110
+</td>
+<td style="text-align:right;">
+53.365
+</td>
 </tr>
-<tr class="even">
-<td align="right">2007</td>
-<td align="right">75.320</td>
-<td align="right">81.235</td>
-<td align="right">78.553</td>
-<td align="right">80.204</td>
-<td align="right">49.339</td>
+<tr>
+<td style="text-align:right;">
+2007
+</td>
+<td style="text-align:right;">
+75.320
+</td>
+<td style="text-align:right;">
+81.235
+</td>
+<td style="text-align:right;">
+78.553
+</td>
+<td style="text-align:right;">
+80.204
+</td>
+<td style="text-align:right;">
+49.339
+</td>
 </tr>
 </tbody>
 </table>
@@ -270,129 +428,255 @@ S_LE &lt;- read.csv(&quot;~/Desktop/Stat545: R/STAT545-HWs-Bendriem-Nathan/STAT5
 
 S_Loc &lt;- read.csv(&quot;~/Desktop/Stat545: R/STAT545-HWs-Bendriem-Nathan/STAT545HW4/shark_location.csv&quot;)</code></pre>
 <p>The first dataframe has species, length in meters and life expectancy</p>
-<pre class="r"><code>kable(S_LE)</code></pre>
+<pre class="r"><code>kable(S_LE, format=&quot;html&quot;)</code></pre>
 <table>
 <thead>
-<tr class="header">
-<th align="left">Species</th>
-<th align="right">Length..m.</th>
-<th align="right">LifeExp</th>
+<tr>
+<th style="text-align:left;">
+Species
+</th>
+<th style="text-align:right;">
+Length..m.
+</th>
+<th style="text-align:right;">
+LifeExp
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Frilled</td>
-<td align="right">2.00</td>
-<td align="right">25</td>
+<tr>
+<td style="text-align:left;">
+Frilled
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+25
+</td>
 </tr>
-<tr class="even">
-<td align="left">Sevengill</td>
-<td align="right">3.00</td>
-<td align="right">50</td>
+<tr>
+<td style="text-align:left;">
+Sevengill
+</td>
+<td style="text-align:right;">
+3.00
+</td>
+<td style="text-align:right;">
+50
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Sixgill</td>
-<td align="right">4.80</td>
-<td align="right">80</td>
+<tr>
+<td style="text-align:left;">
+Sixgill
+</td>
+<td style="text-align:right;">
+4.80
+</td>
+<td style="text-align:right;">
+80
+</td>
 </tr>
-<tr class="even">
-<td align="left">Prickly</td>
-<td align="right">4.00</td>
-<td align="right">30</td>
+<tr>
+<td style="text-align:left;">
+Prickly
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+30
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Spiny Dogfish</td>
-<td align="right">1.20</td>
-<td align="right">70</td>
+<tr>
+<td style="text-align:left;">
+Spiny Dogfish
+</td>
+<td style="text-align:right;">
+1.20
+</td>
+<td style="text-align:right;">
+70
+</td>
 </tr>
-<tr class="even">
-<td align="left">Pygmy</td>
-<td align="right">0.28</td>
-<td align="right">45</td>
+<tr>
+<td style="text-align:left;">
+Pygmy
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+45
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Pacific Angel Shark</td>
-<td align="right">1.50</td>
-<td align="right">25</td>
+<tr>
+<td style="text-align:left;">
+Pacific Angel Shark
+</td>
+<td style="text-align:right;">
+1.50
+</td>
+<td style="text-align:right;">
+25
+</td>
 </tr>
-<tr class="even">
-<td align="left">Horn</td>
-<td align="right">1.00</td>
-<td align="right">35</td>
+<tr>
+<td style="text-align:left;">
+Horn
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+35
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Whale</td>
-<td align="right">12.65</td>
-<td align="right">30</td>
+<tr>
+<td style="text-align:left;">
+Whale
+</td>
+<td style="text-align:right;">
+12.65
+</td>
+<td style="text-align:right;">
+30
+</td>
 </tr>
-<tr class="even">
-<td align="left">Nurse</td>
-<td align="right">2.20</td>
-<td align="right">25</td>
+<tr>
+<td style="text-align:left;">
+Nurse
+</td>
+<td style="text-align:right;">
+2.20
+</td>
+<td style="text-align:right;">
+25
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Thresher</td>
-<td align="right">6.10</td>
-<td align="right">22</td>
+<tr>
+<td style="text-align:left;">
+Thresher
+</td>
+<td style="text-align:right;">
+6.10
+</td>
+<td style="text-align:right;">
+22
+</td>
 </tr>
-<tr class="even">
-<td align="left">Basking</td>
-<td align="right">10.00</td>
-<td align="right">50</td>
+<tr>
+<td style="text-align:left;">
+Basking
+</td>
+<td style="text-align:right;">
+10.00
+</td>
+<td style="text-align:right;">
+50
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Mako</td>
-<td align="right">4.00</td>
-<td align="right">35</td>
+<tr>
+<td style="text-align:left;">
+Mako
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+35
+</td>
 </tr>
-<tr class="even">
-<td align="left">Great White</td>
-<td align="right">6.40</td>
-<td align="right">70</td>
+<tr>
+<td style="text-align:left;">
+Great White
+</td>
+<td style="text-align:right;">
+6.40
+</td>
+<td style="text-align:right;">
+70
+</td>
 </tr>
 </tbody>
 </table>
 <p>The second dataframe has a couple of the same species, and where they are found, whether its coastal, pelagic, or benthic</p>
-<pre class="r"><code>kable(S_Loc)</code></pre>
+<pre class="r"><code>kable(S_Loc, format=&quot;html&quot;)</code></pre>
 <table>
 <thead>
-<tr class="header">
-<th align="left">Species</th>
-<th align="left">Location</th>
+<tr>
+<th style="text-align:left;">
+Species
+</th>
+<th style="text-align:left;">
+Location
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Horn</td>
-<td align="left">Coastal</td>
+<tr>
+<td style="text-align:left;">
+Horn
+</td>
+<td style="text-align:left;">
+Coastal
+</td>
 </tr>
-<tr class="even">
-<td align="left">Frilled</td>
-<td align="left">Benthic</td>
+<tr>
+<td style="text-align:left;">
+Frilled
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Spiny Dogfish</td>
-<td align="left">Coastal</td>
+<tr>
+<td style="text-align:left;">
+Spiny Dogfish
+</td>
+<td style="text-align:left;">
+Coastal
+</td>
 </tr>
-<tr class="even">
-<td align="left">Whale</td>
-<td align="left">Pelagic</td>
+<tr>
+<td style="text-align:left;">
+Whale
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Great White</td>
-<td align="left">Pelagic</td>
+<tr>
+<td style="text-align:left;">
+Great White
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
 </tr>
-<tr class="even">
-<td align="left">Mako</td>
-<td align="left">Pelagic</td>
+<tr>
+<td style="text-align:left;">
+Mako
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Basking</td>
-<td align="left">Pelagic</td>
+<tr>
+<td style="text-align:left;">
+Basking
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
 </tr>
-<tr class="even">
-<td align="left">Sixgill</td>
-<td align="left">Benthic</td>
+<tr>
+<td style="text-align:left;">
+Sixgill
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
 </tr>
 </tbody>
 </table>
@@ -402,166 +686,358 @@ S_Loc &lt;- read.csv(&quot;~/Desktop/Stat545: R/STAT545-HWs-Bendriem-Nathan/STAT
 <div id="left-and-right-join" class="section level1">
 <h1>Left and Right Join</h1>
 <p>Left join will take matching rows from the second variable and add them to the first variable. Right join will do the inverse and add matching rows from the first variable and add them to the second variable</p>
-<pre class="r"><code>left_join(S_LE, S_Loc, by=&quot;Species&quot;) %&gt;% kable()</code></pre>
+<pre class="r"><code>left_join(S_LE, S_Loc, by=&quot;Species&quot;) %&gt;% kable(format=&quot;html&quot;)</code></pre>
 <pre><code>## Warning: Column `Species` joining factors with different levels, coercing
 ## to character vector</code></pre>
 <table>
 <thead>
-<tr class="header">
-<th align="left">Species</th>
-<th align="right">Length..m.</th>
-<th align="right">LifeExp</th>
-<th align="left">Location</th>
+<tr>
+<th style="text-align:left;">
+Species
+</th>
+<th style="text-align:right;">
+Length..m.
+</th>
+<th style="text-align:right;">
+LifeExp
+</th>
+<th style="text-align:left;">
+Location
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Frilled</td>
-<td align="right">2.00</td>
-<td align="right">25</td>
-<td align="left">Benthic</td>
+<tr>
+<td style="text-align:left;">
+Frilled
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
 </tr>
-<tr class="even">
-<td align="left">Sevengill</td>
-<td align="right">3.00</td>
-<td align="right">50</td>
-<td align="left">NA</td>
+<tr>
+<td style="text-align:left;">
+Sevengill
+</td>
+<td style="text-align:right;">
+3.00
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Sixgill</td>
-<td align="right">4.80</td>
-<td align="right">80</td>
-<td align="left">Benthic</td>
+<tr>
+<td style="text-align:left;">
+Sixgill
+</td>
+<td style="text-align:right;">
+4.80
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
 </tr>
-<tr class="even">
-<td align="left">Prickly</td>
-<td align="right">4.00</td>
-<td align="right">30</td>
-<td align="left">NA</td>
+<tr>
+<td style="text-align:left;">
+Prickly
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Spiny Dogfish</td>
-<td align="right">1.20</td>
-<td align="right">70</td>
-<td align="left">Coastal</td>
+<tr>
+<td style="text-align:left;">
+Spiny Dogfish
+</td>
+<td style="text-align:right;">
+1.20
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:left;">
+Coastal
+</td>
 </tr>
-<tr class="even">
-<td align="left">Pygmy</td>
-<td align="right">0.28</td>
-<td align="right">45</td>
-<td align="left">NA</td>
+<tr>
+<td style="text-align:left;">
+Pygmy
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:left;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Pacific Angel Shark</td>
-<td align="right">1.50</td>
-<td align="right">25</td>
-<td align="left">NA</td>
+<tr>
+<td style="text-align:left;">
+Pacific Angel Shark
+</td>
+<td style="text-align:right;">
+1.50
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">Horn</td>
-<td align="right">1.00</td>
-<td align="right">35</td>
-<td align="left">Coastal</td>
+<tr>
+<td style="text-align:left;">
+Horn
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:left;">
+Coastal
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Whale</td>
-<td align="right">12.65</td>
-<td align="right">30</td>
-<td align="left">Pelagic</td>
+<tr>
+<td style="text-align:left;">
+Whale
+</td>
+<td style="text-align:right;">
+12.65
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
 </tr>
-<tr class="even">
-<td align="left">Nurse</td>
-<td align="right">2.20</td>
-<td align="right">25</td>
-<td align="left">NA</td>
+<tr>
+<td style="text-align:left;">
+Nurse
+</td>
+<td style="text-align:right;">
+2.20
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Thresher</td>
-<td align="right">6.10</td>
-<td align="right">22</td>
-<td align="left">NA</td>
+<tr>
+<td style="text-align:left;">
+Thresher
+</td>
+<td style="text-align:right;">
+6.10
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:left;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">Basking</td>
-<td align="right">10.00</td>
-<td align="right">50</td>
-<td align="left">Pelagic</td>
+<tr>
+<td style="text-align:left;">
+Basking
+</td>
+<td style="text-align:right;">
+10.00
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Mako</td>
-<td align="right">4.00</td>
-<td align="right">35</td>
-<td align="left">Pelagic</td>
+<tr>
+<td style="text-align:left;">
+Mako
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
 </tr>
-<tr class="even">
-<td align="left">Great White</td>
-<td align="right">6.40</td>
-<td align="right">70</td>
-<td align="left">Pelagic</td>
+<tr>
+<td style="text-align:left;">
+Great White
+</td>
+<td style="text-align:right;">
+6.40
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
 </tr>
 </tbody>
 </table>
 <p>Here, all species of sharks are presented and those the corresponding location for the sharks found in S_LE and not in S_Loc come up as “NA”</p>
-<pre class="r"><code>right_join(S_LE, S_Loc, by=&quot;Species&quot;) %&gt;% kable()</code></pre>
+<pre class="r"><code>right_join(S_LE, S_Loc, by=&quot;Species&quot;) %&gt;% kable(format=&quot;html&quot;)</code></pre>
 <pre><code>## Warning: Column `Species` joining factors with different levels, coercing
 ## to character vector</code></pre>
 <table>
 <thead>
-<tr class="header">
-<th align="left">Species</th>
-<th align="right">Length..m.</th>
-<th align="right">LifeExp</th>
-<th align="left">Location</th>
+<tr>
+<th style="text-align:left;">
+Species
+</th>
+<th style="text-align:right;">
+Length..m.
+</th>
+<th style="text-align:right;">
+LifeExp
+</th>
+<th style="text-align:left;">
+Location
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Horn</td>
-<td align="right">1.00</td>
-<td align="right">35</td>
-<td align="left">Coastal</td>
+<tr>
+<td style="text-align:left;">
+Horn
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:left;">
+Coastal
+</td>
 </tr>
-<tr class="even">
-<td align="left">Frilled</td>
-<td align="right">2.00</td>
-<td align="right">25</td>
-<td align="left">Benthic</td>
+<tr>
+<td style="text-align:left;">
+Frilled
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Spiny Dogfish</td>
-<td align="right">1.20</td>
-<td align="right">70</td>
-<td align="left">Coastal</td>
+<tr>
+<td style="text-align:left;">
+Spiny Dogfish
+</td>
+<td style="text-align:right;">
+1.20
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:left;">
+Coastal
+</td>
 </tr>
-<tr class="even">
-<td align="left">Whale</td>
-<td align="right">12.65</td>
-<td align="right">30</td>
-<td align="left">Pelagic</td>
+<tr>
+<td style="text-align:left;">
+Whale
+</td>
+<td style="text-align:right;">
+12.65
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Great White</td>
-<td align="right">6.40</td>
-<td align="right">70</td>
-<td align="left">Pelagic</td>
+<tr>
+<td style="text-align:left;">
+Great White
+</td>
+<td style="text-align:right;">
+6.40
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
 </tr>
-<tr class="even">
-<td align="left">Mako</td>
-<td align="right">4.00</td>
-<td align="right">35</td>
-<td align="left">Pelagic</td>
+<tr>
+<td style="text-align:left;">
+Mako
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Basking</td>
-<td align="right">10.00</td>
-<td align="right">50</td>
-<td align="left">Pelagic</td>
+<tr>
+<td style="text-align:left;">
+Basking
+</td>
+<td style="text-align:right;">
+10.00
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
 </tr>
-<tr class="even">
-<td align="left">Sixgill</td>
-<td align="right">4.80</td>
-<td align="right">80</td>
-<td align="left">Benthic</td>
+<tr>
+<td style="text-align:left;">
+Sixgill
+</td>
+<td style="text-align:right;">
+4.80
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
 </tr>
 </tbody>
 </table>
@@ -1049,6 +1525,7 @@ S_Loc &lt;- read.csv(&quot;~/Desktop/Stat545: R/STAT545-HWs-Bendriem-Nathan/STAT
 <p>The second part of the homework took much longer to complete, but mostly because we have not had much work with the join and binding functions yet.<br />
 Uploading the new dataframes was difficult as I had to pinpoint the right working directory before it would upload.</p>
 <p>In terms of the join functions, I relied heavily on the data wrangling cheatsheet found <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">here</a></p>
+<p>I am still having trouble hiding the library code chunk at the top of the page if anyone could help me out with that! I have tried include=FALSE, warning=FALSE, message=FALSE, results=‘hide’, echo=FALSE, cache=FALSE with no luck….</p>
 </div>
 </div>
 

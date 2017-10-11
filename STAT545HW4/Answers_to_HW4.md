@@ -43,27 +43,120 @@ I will use tidyr and kable functions to clean up the table, and add a title
 
 
 ```r
-knitr::kable(antarctic_countries2, col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
+knitr::kable(antarctic_countries2, format ="html", col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
 ```
 
-
-
-Table: Life Expectancy of Antarctic Countries
-
- Year   Argentina   Australia    Chile   New Zealand   South Africa
------  ----------  ----------  -------  ------------  -------------
- 1952      62.485      69.120   54.745        69.390         45.009
- 1957      64.399      70.330   56.074        70.260         47.985
- 1962      65.142      70.930   57.924        71.240         49.951
- 1967      65.634      71.100   60.523        71.520         51.927
- 1972      67.065      71.930   63.441        71.890         53.696
- 1977      68.481      73.490   67.052        72.220         55.527
- 1982      69.942      74.740   70.565        73.840         58.161
- 1987      70.774      76.320   72.492        74.320         60.834
- 1992      71.868      77.560   74.126        76.330         61.888
- 1997      73.275      78.830   75.816        77.550         60.236
- 2002      74.340      80.370   77.860        79.110         53.365
- 2007      75.320      81.235   78.553        80.204         49.339
+<table>
+<caption>Life Expectancy of Antarctic Countries</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Year </th>
+   <th style="text-align:right;"> Argentina </th>
+   <th style="text-align:right;"> Australia </th>
+   <th style="text-align:right;"> Chile </th>
+   <th style="text-align:right;"> New Zealand </th>
+   <th style="text-align:right;"> South Africa </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1952 </td>
+   <td style="text-align:right;"> 62.485 </td>
+   <td style="text-align:right;"> 69.120 </td>
+   <td style="text-align:right;"> 54.745 </td>
+   <td style="text-align:right;"> 69.390 </td>
+   <td style="text-align:right;"> 45.009 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1957 </td>
+   <td style="text-align:right;"> 64.399 </td>
+   <td style="text-align:right;"> 70.330 </td>
+   <td style="text-align:right;"> 56.074 </td>
+   <td style="text-align:right;"> 70.260 </td>
+   <td style="text-align:right;"> 47.985 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1962 </td>
+   <td style="text-align:right;"> 65.142 </td>
+   <td style="text-align:right;"> 70.930 </td>
+   <td style="text-align:right;"> 57.924 </td>
+   <td style="text-align:right;"> 71.240 </td>
+   <td style="text-align:right;"> 49.951 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1967 </td>
+   <td style="text-align:right;"> 65.634 </td>
+   <td style="text-align:right;"> 71.100 </td>
+   <td style="text-align:right;"> 60.523 </td>
+   <td style="text-align:right;"> 71.520 </td>
+   <td style="text-align:right;"> 51.927 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1972 </td>
+   <td style="text-align:right;"> 67.065 </td>
+   <td style="text-align:right;"> 71.930 </td>
+   <td style="text-align:right;"> 63.441 </td>
+   <td style="text-align:right;"> 71.890 </td>
+   <td style="text-align:right;"> 53.696 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1977 </td>
+   <td style="text-align:right;"> 68.481 </td>
+   <td style="text-align:right;"> 73.490 </td>
+   <td style="text-align:right;"> 67.052 </td>
+   <td style="text-align:right;"> 72.220 </td>
+   <td style="text-align:right;"> 55.527 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1982 </td>
+   <td style="text-align:right;"> 69.942 </td>
+   <td style="text-align:right;"> 74.740 </td>
+   <td style="text-align:right;"> 70.565 </td>
+   <td style="text-align:right;"> 73.840 </td>
+   <td style="text-align:right;"> 58.161 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1987 </td>
+   <td style="text-align:right;"> 70.774 </td>
+   <td style="text-align:right;"> 76.320 </td>
+   <td style="text-align:right;"> 72.492 </td>
+   <td style="text-align:right;"> 74.320 </td>
+   <td style="text-align:right;"> 60.834 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1992 </td>
+   <td style="text-align:right;"> 71.868 </td>
+   <td style="text-align:right;"> 77.560 </td>
+   <td style="text-align:right;"> 74.126 </td>
+   <td style="text-align:right;"> 76.330 </td>
+   <td style="text-align:right;"> 61.888 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1997 </td>
+   <td style="text-align:right;"> 73.275 </td>
+   <td style="text-align:right;"> 78.830 </td>
+   <td style="text-align:right;"> 75.816 </td>
+   <td style="text-align:right;"> 77.550 </td>
+   <td style="text-align:right;"> 60.236 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2002 </td>
+   <td style="text-align:right;"> 74.340 </td>
+   <td style="text-align:right;"> 80.370 </td>
+   <td style="text-align:right;"> 77.860 </td>
+   <td style="text-align:right;"> 79.110 </td>
+   <td style="text-align:right;"> 53.365 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2007 </td>
+   <td style="text-align:right;"> 75.320 </td>
+   <td style="text-align:right;"> 81.235 </td>
+   <td style="text-align:right;"> 78.553 </td>
+   <td style="text-align:right;"> 80.204 </td>
+   <td style="text-align:right;"> 49.339 </td>
+  </tr>
+</tbody>
+</table>
 
 
 Next, we will plot the life Expectancy of Argentina vs that of Chile.  I used the scale_colour_discrete function to take out the title of the legend and rename the dot from "red" to "Life Expectancy"
@@ -94,47 +187,140 @@ The first dataframe has species, length in meters and life expectancy
 
 
 ```r
-kable(S_LE)
+kable(S_LE, format="html")
 ```
 
-
-
-Species                Length..m.   LifeExp
---------------------  -----------  --------
-Frilled                      2.00        25
-Sevengill                    3.00        50
-Sixgill                      4.80        80
-Prickly                      4.00        30
-Spiny Dogfish                1.20        70
-Pygmy                        0.28        45
-Pacific Angel Shark          1.50        25
-Horn                         1.00        35
-Whale                       12.65        30
-Nurse                        2.20        25
-Thresher                     6.10        22
-Basking                     10.00        50
-Mako                         4.00        35
-Great White                  6.40        70
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Species </th>
+   <th style="text-align:right;"> Length..m. </th>
+   <th style="text-align:right;"> LifeExp </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Frilled </td>
+   <td style="text-align:right;"> 2.00 </td>
+   <td style="text-align:right;"> 25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sevengill </td>
+   <td style="text-align:right;"> 3.00 </td>
+   <td style="text-align:right;"> 50 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sixgill </td>
+   <td style="text-align:right;"> 4.80 </td>
+   <td style="text-align:right;"> 80 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Prickly </td>
+   <td style="text-align:right;"> 4.00 </td>
+   <td style="text-align:right;"> 30 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spiny Dogfish </td>
+   <td style="text-align:right;"> 1.20 </td>
+   <td style="text-align:right;"> 70 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pygmy </td>
+   <td style="text-align:right;"> 0.28 </td>
+   <td style="text-align:right;"> 45 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pacific Angel Shark </td>
+   <td style="text-align:right;"> 1.50 </td>
+   <td style="text-align:right;"> 25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Horn </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Whale </td>
+   <td style="text-align:right;"> 12.65 </td>
+   <td style="text-align:right;"> 30 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Nurse </td>
+   <td style="text-align:right;"> 2.20 </td>
+   <td style="text-align:right;"> 25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Thresher </td>
+   <td style="text-align:right;"> 6.10 </td>
+   <td style="text-align:right;"> 22 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Basking </td>
+   <td style="text-align:right;"> 10.00 </td>
+   <td style="text-align:right;"> 50 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mako </td>
+   <td style="text-align:right;"> 4.00 </td>
+   <td style="text-align:right;"> 35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Great White </td>
+   <td style="text-align:right;"> 6.40 </td>
+   <td style="text-align:right;"> 70 </td>
+  </tr>
+</tbody>
+</table>
 
 The second dataframe has a couple of the same species, and where they are found, whether its coastal, pelagic, or benthic
 
 
 ```r
-kable(S_Loc)
+kable(S_Loc, format="html")
 ```
 
-
-
-Species         Location 
---------------  ---------
-Horn            Coastal  
-Frilled         Benthic  
-Spiny Dogfish   Coastal  
-Whale           Pelagic  
-Great White     Pelagic  
-Mako            Pelagic  
-Basking         Pelagic  
-Sixgill         Benthic  
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Species </th>
+   <th style="text-align:left;"> Location </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Horn </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Frilled </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spiny Dogfish </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Whale </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Great White </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mako </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Basking </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sixgill </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+</tbody>
+</table>
 
 Then I play around with the join functions with both data frames. 
 
@@ -144,7 +330,7 @@ Left join will take matching rows from the second variable and add them to the f
 
 
 ```r
-left_join(S_LE, S_Loc, by="Species") %>% kable()
+left_join(S_LE, S_Loc, by="Species") %>% kable(format="html")
 ```
 
 ```
@@ -152,30 +338,108 @@ left_join(S_LE, S_Loc, by="Species") %>% kable()
 ## to character vector
 ```
 
-
-
-Species                Length..m.   LifeExp  Location 
---------------------  -----------  --------  ---------
-Frilled                      2.00        25  Benthic  
-Sevengill                    3.00        50  NA       
-Sixgill                      4.80        80  Benthic  
-Prickly                      4.00        30  NA       
-Spiny Dogfish                1.20        70  Coastal  
-Pygmy                        0.28        45  NA       
-Pacific Angel Shark          1.50        25  NA       
-Horn                         1.00        35  Coastal  
-Whale                       12.65        30  Pelagic  
-Nurse                        2.20        25  NA       
-Thresher                     6.10        22  NA       
-Basking                     10.00        50  Pelagic  
-Mako                         4.00        35  Pelagic  
-Great White                  6.40        70  Pelagic  
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Species </th>
+   <th style="text-align:right;"> Length..m. </th>
+   <th style="text-align:right;"> LifeExp </th>
+   <th style="text-align:left;"> Location </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Frilled </td>
+   <td style="text-align:right;"> 2.00 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sevengill </td>
+   <td style="text-align:right;"> 3.00 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sixgill </td>
+   <td style="text-align:right;"> 4.80 </td>
+   <td style="text-align:right;"> 80 </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Prickly </td>
+   <td style="text-align:right;"> 4.00 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spiny Dogfish </td>
+   <td style="text-align:right;"> 1.20 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pygmy </td>
+   <td style="text-align:right;"> 0.28 </td>
+   <td style="text-align:right;"> 45 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pacific Angel Shark </td>
+   <td style="text-align:right;"> 1.50 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Horn </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Whale </td>
+   <td style="text-align:right;"> 12.65 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Nurse </td>
+   <td style="text-align:right;"> 2.20 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Thresher </td>
+   <td style="text-align:right;"> 6.10 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Basking </td>
+   <td style="text-align:right;"> 10.00 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mako </td>
+   <td style="text-align:right;"> 4.00 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Great White </td>
+   <td style="text-align:right;"> 6.40 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+</tbody>
+</table>
 
 Here, all species of sharks are presented and those the corresponding location for the sharks found in S_LE and not in S_Loc come up as "NA"
 
 
 ```r
-right_join(S_LE, S_Loc, by="Species") %>% kable()
+right_join(S_LE, S_Loc, by="Species") %>% kable(format="html")
 ```
 
 ```
@@ -183,18 +447,66 @@ right_join(S_LE, S_Loc, by="Species") %>% kable()
 ## to character vector
 ```
 
-
-
-Species          Length..m.   LifeExp  Location 
---------------  -----------  --------  ---------
-Horn                   1.00        35  Coastal  
-Frilled                2.00        25  Benthic  
-Spiny Dogfish          1.20        70  Coastal  
-Whale                 12.65        30  Pelagic  
-Great White            6.40        70  Pelagic  
-Mako                   4.00        35  Pelagic  
-Basking               10.00        50  Pelagic  
-Sixgill                4.80        80  Benthic  
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Species </th>
+   <th style="text-align:right;"> Length..m. </th>
+   <th style="text-align:right;"> LifeExp </th>
+   <th style="text-align:left;"> Location </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Horn </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Frilled </td>
+   <td style="text-align:right;"> 2.00 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spiny Dogfish </td>
+   <td style="text-align:right;"> 1.20 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:left;"> Coastal </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Whale </td>
+   <td style="text-align:right;"> 12.65 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Great White </td>
+   <td style="text-align:right;"> 6.40 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mako </td>
+   <td style="text-align:right;"> 4.00 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Basking </td>
+   <td style="text-align:right;"> 10.00 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> Pelagic </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sixgill </td>
+   <td style="text-align:right;"> 4.80 </td>
+   <td style="text-align:right;"> 80 </td>
+   <td style="text-align:left;"> Benthic </td>
+  </tr>
+</tbody>
+</table>
 
 As you can see, in the right join, only the species that are found in the S_Loc dataframe are depicted.  
 
@@ -406,6 +718,10 @@ The second part of the homework took much longer to complete, but mostly because
 Uploading the new dataframes was difficult as I had to pinpoint the right working directory before it would upload. 
 
 In terms of the join functions, I relied heavily on the data wrangling cheatsheet found [here](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+I am still having trouble hiding the library code chunk at the top of the page if anyone could help me out with that!  I have tried include=FALSE, warning=FALSE, message=FALSE, results='hide', echo=FALSE, cache=FALSE with no luck....
+
+
 
 
 

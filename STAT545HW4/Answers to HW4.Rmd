@@ -49,7 +49,7 @@ I will use tidyr and kable functions to clean up the table, and add a title
 
 
 ```{r}
-knitr::kable(antarctic_countries2, format = "html" col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
+knitr::kable(antarctic_countries2, format ="html", col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
 ```
 
 
