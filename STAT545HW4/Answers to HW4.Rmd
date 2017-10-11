@@ -49,7 +49,7 @@ I will use tidyr and kable functions to clean up the table, and add a title
 
 
 ```{r}
-knitr::kable(antarctic_countries2, col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
+knitr::kable(antarctic_countries2, format = "html" col.names=c("Year", "Argentina", "Australia", "Chile", "New Zealand", "South Africa"), caption="Life Expectancy of Antarctic Countries")
 ```
 
 
@@ -77,13 +77,13 @@ S_Loc <- read.csv("~/Desktop/Stat545: R/STAT545-HWs-Bendriem-Nathan/STAT545HW4/s
 The first dataframe has species, length in meters and life expectancy
 
 ```{r}
-kable(S_LE)
+kable(S_LE, format="html")
 ```
 
 The second dataframe has a couple of the same species, and where they are found, whether its coastal, pelagic, or benthic
 
 ```{r}
-kable(S_Loc)
+kable(S_Loc, format="html")
 ```
 
 Then I play around with the join functions with both data frames. 
@@ -93,13 +93,13 @@ Then I play around with the join functions with both data frames.
 Left join will take matching rows from the second variable and add them to the first variable.  Right join will do the inverse and add matching rows from the first variable and add them to the second variable
 
 ```{r}
-left_join(S_LE, S_Loc, by="Species") %>% kable()
+left_join(S_LE, S_Loc, by="Species") %>% kable(format="html")
 ```
 
 Here, all species of sharks are presented and those the corresponding location for the sharks found in S_LE and not in S_Loc come up as "NA"
 
 ```{r}
-right_join(S_LE, S_Loc, by="Species") %>% kable()
+right_join(S_LE, S_Loc, by="Species") %>% kable(format="html")
 ```
 
 As you can see, in the right join, only the species that are found in the S_Loc dataframe are depicted.  
