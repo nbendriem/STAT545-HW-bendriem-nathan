@@ -1,0 +1,63 @@
+---
+title: "HW05"
+author: "Nathan Bendriem"
+date: "October 14, 2017"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(gapminder)
+library(forcats)
+library(dplyr)
+library(tidyverse)
+library(knitr)
+library(tidyr)
+```
+
+
+# WELCOME! to the fifth and final homework assignment for STAT545
+
+The goals for this homework are:
+- Reorder a fctor in a principled way based on the data and demonstrate the effect in arranged data and figures
+- Improve a figure using new knowledge
+- Implement visualtion design principles
+-  Write some data to file and load it back into R
+- Organize my Github as a final goodbye 
+
+Lets get right into it!
+
+## Factor Management
+
+To go full circle, I decided to go back to the gapminder dataset since we've been focusing a lot on the singer dataframes in class lately.
+
+Step goals:
+- Define factor variables
+- Drop factor/levels
+- Reorder levels based on knowledge from data
+
+### Drop Oceania
+
+```{r}
+Oceania1 <- gapminder %>% filter(continent=="Oceania")
+```
+
+Oceania is a continent with two countries (Australia and New Zealand) with 24 observations in the gapminder dataset
+
+```{r}
+
+```
+
+
+```{r}
+glimpse(Oceania)
+```
+
+```{r}
+Bye_Oceania <- gapminder %>% mutate(oceania_factor=as_factor(oceania) %>% 
+```
+
