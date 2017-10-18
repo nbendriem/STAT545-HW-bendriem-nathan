@@ -1,9 +1,3 @@
----
-
-output: 
-  html_document: 
-    keep_md: yes
----
 
 # Hello STAT545 peeeps
 My name is Nathan Bendriem
