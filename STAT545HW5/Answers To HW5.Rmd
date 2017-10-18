@@ -61,3 +61,44 @@ glimpse(Oceania)
 Bye_Oceania <- gapminder %>% mutate(oceania_factor=as_factor(oceania) %>% 
 ```
 
+
+
+## Visualization Design
+
+For this section of the homework, I will take an old figure I made in Homework 2 and spice it up.  I'm going to change the color scheme, the code chunk, and add a legend.
+
+First, here is the graph and code as it was written in [HW2](https://github.com/nbendriem/STAT545-HW-bendriem-nathan/blob/master/STAT545HW2/Answers_to_HW02.md)
+
+```{r}
+NorthAfrica <- filter(gapminder, country=="Algeria" | country=="Tunisia" | country=="Egypt" | country=="Morocco" | country=="Libya" | country=="Sudan")
+
+ggplot(NorthAfrica, aes(x= country, y=lifeExp)) + geom_boxplot(colour= "black", fill="red", alpha=0.33) + labs(x="Country", y="Life Expectancy") + ggtitle("Boxplot of Life Expectancy of North African Countries")
+
+```
+
+I am going to start by cleaning up the code chunk
+
+```{r}
+NorthAfrica2 <- filter(gapminder, country==c("Algeria", "Tunisia", "Egypt", "Morocco", "Libya", "Sudan")
+```
+
+And the graph as well
+
+```{r}
+library(RColorBrewer)
+```
+
+```{r}
+NAfricaPlot <- ggplot(NorthAfrica2, aes(country, lifeExp)) + geom_boxplot(aes(fill=country)) + scale_fill_brewer(palette = "Blues") + labs(x="Country", y="Life Expectancy", title="Life Expectancy of N. African Countries") + guides(fill=guide_legend(title="North African \nCountry")) + theme_bw()
+```
+
+
+## Writing figures to file
+
+I will use ggsave to save the plot above and then load and embed it in this report
+
+```{r}
+ggsave("My_Plot.pdf", NAfricaPlot, width=6, height=4, units="in")
+```
+
+?ggsave
