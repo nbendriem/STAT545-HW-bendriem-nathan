@@ -124,16 +124,25 @@ forcats::fct_count(ByeOceania$continent)
 ```
 
 
+### Factor Reorder
+
+Reorder the levels of country.  Use the forcats package to change the order of the factor levels baes on a principled summary of one of the quantiatve variables.
+
+The variable I will be working with is the gdp Per capita.  We will be focusing on the countries with the maximum gdp per capita.  By using the head() function, we only keep the top 6 countries with the highest gdp per capita.
+
 
 ```r
 ContinentReOrder <- fct_reorder(ByeOceania$country, ByeOceania$gdpPercap, max, .desc= TRUE) %>% levels() %>% head()
 ```
+
+With the reordering done, I will define MaxGDP as a dataframe with only the year, country, and the gdp per capita.  It eliminates the life Expectancy and the continent factors
 
 
 ```r
 MaxGDP <- ByeOceania %>% filter(country %in% ContinentReOrder) %>% select(year, country, gdpPercap)
 ```
 
+Lets plot Max GDP!
 
 
 ```r
@@ -141,6 +150,13 @@ ggplot(MaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + g
 ```
 
 ![](Answers_To_HW5_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+
+### Common Part
+
+Characterieze the derived data before and after your factor re-leveling
+
+
+In the table below, you'll notice that it is arrangd in alphabetical order by country, not by descending Maximum GDP per capita
 
 
 ```r
@@ -520,8 +536,6 @@ MaxGDP %>% group_by(country) %>% knitr::kable(format="html")
 </table>
 
 
-
-Shown above, it is arragned in alphabetical order by country
 
 And the plot looks like this:
 
@@ -1306,13 +1320,34 @@ knitr::kable(HighGDP, format="html")
 </table>
 
 
+In this graph, the legend illustrates the country with the highest gdp in descending order:
+
+
+
 ```r
 ggplot(HighGDP, aes(year, maximumgdp, colour= fct_reorder(country, maximumgdp, .desc=TRUE))) + facet_wrap(~country) + geom_line() + scale_colour_discrete(name="Highest GDP per Cap") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
 ```
 
 ![](Answers_To_HW5_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
-In this graph, the legend illustrates the country with the highest gdp in descending order.
+### File I/O
+
+Experiment with write_csv or read_csv.  
+
+
+```r
+write_csv(MaxGDP, "~/Lets-Practice-CSV")
+MaxGDP_Read <- read_csv("~/Lets-Practice-CSV")
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   year = col_integer(),
+##   country = col_character(),
+##   gdpPercap = col_double()
+## )
+```
 
 
 ## Visualization Design
@@ -1328,7 +1363,7 @@ NorthAfrica <- filter(gapminder, country=="Algeria" | country=="Tunisia" | count
 ggplot(NorthAfrica, aes(x= country, y=lifeExp)) + geom_boxplot(colour= "black", fill="red", alpha=0.33) + labs(x="Country", y="Life Expectancy") + ggtitle("Boxplot of Life Expectancy of North African Countries")
 ```
 
-![](Answers_To_HW5_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+![](Answers_To_HW5_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
 
 I am going to start by cleaning up the code chunk
 
@@ -1347,7 +1382,7 @@ NAfricaPlot <- ggplot(NorthAfrica2, aes(country, lifeExp)) + geom_boxplot(aes(fi
 NAfricaPlot
 ```
 
-![](Answers_To_HW5_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](Answers_To_HW5_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
 
 
 ## Writing figures to file

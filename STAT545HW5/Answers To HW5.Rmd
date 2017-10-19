@@ -74,26 +74,40 @@ forcats::fct_count(ByeOceania$continent)
 ```
 
 
+### Factor Reorder
+
+Reorder the levels of country.  Use the forcats package to change the order of the factor levels baes on a principled summary of one of the quantiatve variables.
+
+The variable I will be working with is the gdp Per capita.  We will be focusing on the countries with the maximum gdp per capita.  By using the head() function, we only keep the top 6 countries with the highest gdp per capita.
+
 ```{r}
 ContinentReOrder <- fct_reorder(ByeOceania$country, ByeOceania$gdpPercap, max, .desc= TRUE) %>% levels() %>% head()
 ```
+
+With the reordering done, I will define MaxGDP as a dataframe with only the year, country, and the gdp per capita.  It eliminates the life Expectancy and the continent factors
 
 ```{r}
 MaxGDP <- ByeOceania %>% filter(country %in% ContinentReOrder) %>% select(year, country, gdpPercap)
 ```
 
+Lets plot Max GDP!
 
 ```{r}
 ggplot(MaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + geom_line() + scale_colour_brewer(palette="Dark2") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
 ```
+
+### Common Part
+
+Characterieze the derived data before and after your factor re-leveling
+
+
+In the table below, you'll notice that it is arrangd in alphabetical order by country, not by descending Maximum GDP per capita
 
 ```{r}
 MaxGDP %>% group_by(country) %>% knitr::kable(format="html")
 ```
 
 
-
-Shown above, it is arragned in alphabetical order by country
 
 And the plot looks like this:
 
@@ -125,11 +139,22 @@ HighGDP <- MaxGDP %>% group_by(country, year) %>% summarize(maximumgdp= max(gdpP
 knitr::kable(HighGDP, format="html")
 ```
 
+
+In this graph, the legend illustrates the country with the highest gdp in descending order:
+
+
 ```{r}
 ggplot(HighGDP, aes(year, maximumgdp, colour= fct_reorder(country, maximumgdp, .desc=TRUE))) + facet_wrap(~country) + geom_line() + scale_colour_discrete(name="Highest GDP per Cap") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
 ```
 
-In this graph, the legend illustrates the country with the highest gdp in descending order.
+### File I/O
+
+Experiment with write_csv or read_csv.  
+
+```{r}
+write_csv(MaxGDP, "~/Lets-Practice-CSV")
+MaxGDP_Read <- read_csv("~/Lets-Practice-CSV")
+```
 
 
 ## Visualization Design
