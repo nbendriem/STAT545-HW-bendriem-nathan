@@ -7,16 +7,16 @@ output:
     keep_md: yes
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 ```{r}
-library(gapminder)
-library(forcats)
-library(dplyr)
-library(tidyverse)
-library(knitr)
-library(tidyr)
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(gapminder))
+suppressPackageStartupMessages(library(forcats))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(RColorBrewer))
+suppressMessages(library(devtools))
 ```
 
 
@@ -42,25 +42,95 @@ Step goals:
 
 ### Drop Oceania
 
-```{r}
-Oceania1 <- gapminder %>% filter(continent=="Oceania")
-```
-
-Oceania is a continent with two countries (Australia and New Zealand) with 24 observations in the gapminder dataset
+First lets look at the original gapminder dataframe
 
 ```{r}
+nrow(gapminder)
+levels(gapminder$continent)
+```
 
+and lets look at the number of observations in Oceania
+
+```{r}
+Oceania <- gapminder %>% filter(continent=="Oceania")
+
+str(Oceania)
+```
+
+Oceania has 24 observations in the gapminder dataset
+
+Next we will drop the factor Oceania
+
+```{r}
+ByeOceania <- gapminder %>% filter(continent != "Oceania") %>% droplevels()
+```
+
+Now lets check the numbers of rows in Gapminder, it should be 24 observations less than the original gapminder
+
+```{r}
+nrow(ByeOceania)
+levels(ByeOceania$continent)
+str(ByeOceania)
+forcats::fct_count(ByeOceania$continent)
 ```
 
 
 ```{r}
-glimpse(Oceania)
+ContinentReOrder <- fct_reorder(ByeOceania$country, ByeOceania$gdpPercap, max, .desc= TRUE) %>% levels() %>% head()
 ```
 
 ```{r}
-Bye_Oceania <- gapminder %>% mutate(oceania_factor=as_factor(oceania) %>% 
+MaxGDP <- ByeOceania %>% filter(country %in% ContinentReOrder) %>% select(year, country, gdpPercap)
 ```
 
+
+```{r}
+ggplot(MaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + geom_line() + scale_colour_brewer(palette="Dark2") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
+```
+
+```{r}
+MaxGDP %>% group_by(country) %>% knitr::kable(format="html")
+```
+
+
+
+Shown above, it is arragned in alphabetical order by country
+
+And the plot looks like this:
+
+
+```{r}
+ggplot(MaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + geom_line() + scale_colour_brewer(palette="Dark2") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
+```
+
+Now we re-arrange the dataframe to descend in terms of GDP per Cap
+
+```{r}
+AsceMaxGDP <- MaxGDP %>% group_by(country) %>% arrange(desc(gdpPercap))
+knitr::kable(AsceMaxGDP, format="html")
+```
+
+and the plot looks like this:
+
+```{r}
+ggplot(AsceMaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + geom_line() + scale_colour_brewer(palette="Dark2") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
+```
+
+Yet on the graph, the order is still aphabetical rather than by the country with the highest gdp Per capita.  
+
+We are going to attempt to change the graph so that it is ordered by descending gdp per cap
+
+```{r}
+HighGDP <- MaxGDP %>% group_by(country, year) %>% summarize(maximumgdp= max(gdpPercap)) %>% arrange(desc(maximumgdp))
+
+knitr::kable(HighGDP, format="html")
+```
+
+```{r}
+ggplot(HighGDP, aes(year, maximumgdp, colour= fct_reorder(country, maximumgdp, .desc=TRUE))) + facet_wrap(~country) + geom_line() + scale_colour_discrete(name="Highest GDP per Cap") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
+```
+
+In this graph, the legend illustrates the country with the highest gdp in descending order.
 
 
 ## Visualization Design
@@ -79,17 +149,17 @@ ggplot(NorthAfrica, aes(x= country, y=lifeExp)) + geom_boxplot(colour= "black", 
 I am going to start by cleaning up the code chunk
 
 ```{r}
-NorthAfrica2 <- filter(gapminder, country==c("Algeria", "Tunisia", "Egypt", "Morocco", "Libya", "Sudan")
+NorthAfrica2 <- filter( gapminder, country==c("Algeria", "Tunisia", "Egypt", "Morocco", "Libya", "Sudan"))
+
 ```
 
 And the graph as well
 
-```{r}
-library(RColorBrewer)
-```
 
 ```{r}
-NAfricaPlot <- ggplot(NorthAfrica2, aes(country, lifeExp)) + geom_boxplot(aes(fill=country)) + scale_fill_brewer(palette = "Blues") + labs(x="Country", y="Life Expectancy", title="Life Expectancy of N. African Countries") + guides(fill=guide_legend(title="North African \nCountry")) + theme_bw()
+NAfricaPlot <- ggplot(NorthAfrica2, aes(country, lifeExp)) + geom_boxplot(aes(fill=country)) + scale_fill_brewer(palette = "Blues") + labs(x="Country", y="Life Expectancy", title="Life Expectancy of N. African Countries") + guides(fill=guide_legend(title="North African \nCountry")) + theme_bw() 
+
+NAfricaPlot
 ```
 
 
@@ -101,4 +171,11 @@ I will use ggsave to save the plot above and then load and embed it in this repo
 ggsave("My_Plot.pdf", NAfricaPlot, width=6, height=4, units="in")
 ```
 
-?ggsave
+And this plot is saved within the Homework 5 folder!
+
+to embed it to this markdown file:
+
+
+![](My_Plot.pdf)
+
+
