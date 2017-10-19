@@ -4,14 +4,7 @@ October 14, 2017
 
 
 
-```r
-suppressPackageStartupMessages(library(tidyverse))
-suppressPackageStartupMessages(library(gapminder))
-suppressPackageStartupMessages(library(forcats))
-suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(RColorBrewer))
-suppressMessages(library(devtools))
-```
+
 
 
 # WELCOME! to the fifth and final homework assignment for STAT545
@@ -147,7 +140,7 @@ MaxGDP <- ByeOceania %>% filter(country %in% ContinentReOrder) %>% select(year, 
 ggplot(MaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + geom_line() + scale_colour_brewer(palette="Dark2") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
 ```
 
-![](Answers_To_HW5_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](Answers_To_HW5_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 
 ```r
@@ -526,15 +519,19 @@ MaxGDP %>% group_by(country) %>% knitr::kable(format="html")
 </tbody>
 </table>
 
+
+
 Shown above, it is arragned in alphabetical order by country
 
 And the plot looks like this:
+
+
 
 ```r
 ggplot(MaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + geom_line() + scale_colour_brewer(palette="Dark2") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
 ```
 
-![](Answers_To_HW5_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](Answers_To_HW5_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 Now we re-arrange the dataframe to descend in terms of GDP per Cap
 
@@ -923,7 +920,7 @@ and the plot looks like this:
 ggplot(AsceMaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + geom_line() + scale_colour_brewer(palette="Dark2") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
 ```
 
-![](Answers_To_HW5_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](Answers_To_HW5_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 Yet on the graph, the order is still aphabetical rather than by the country with the highest gdp Per capita.  
 
@@ -1313,7 +1310,7 @@ knitr::kable(HighGDP, format="html")
 ggplot(HighGDP, aes(year, maximumgdp, colour= fct_reorder(country, maximumgdp, .desc=TRUE))) + facet_wrap(~country) + geom_line() + scale_colour_discrete(name="Highest GDP per Cap") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
 ```
 
-![](Answers_To_HW5_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+![](Answers_To_HW5_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
 In this graph, the legend illustrates the country with the highest gdp in descending order.
 
@@ -1331,7 +1328,7 @@ NorthAfrica <- filter(gapminder, country=="Algeria" | country=="Tunisia" | count
 ggplot(NorthAfrica, aes(x= country, y=lifeExp)) + geom_boxplot(colour= "black", fill="red", alpha=0.33) + labs(x="Country", y="Life Expectancy") + ggtitle("Boxplot of Life Expectancy of North African Countries")
 ```
 
-![](Answers_To_HW5_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+![](Answers_To_HW5_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 I am going to start by cleaning up the code chunk
 
@@ -1350,7 +1347,7 @@ NAfricaPlot <- ggplot(NorthAfrica2, aes(country, lifeExp)) + geom_boxplot(aes(fi
 NAfricaPlot
 ```
 
-![](Answers_To_HW5_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](Answers_To_HW5_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
 
 
 ## Writing figures to file

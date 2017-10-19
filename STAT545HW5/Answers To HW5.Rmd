@@ -9,15 +9,14 @@ output:
 
 ```{r setup, include=FALSE, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-```
-```{r}
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(forcats))
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(RColorBrewer))
-suppressMessages(library(devtools))
 ```
+
+
 
 
 # WELCOME! to the fifth and final homework assignment for STAT545
