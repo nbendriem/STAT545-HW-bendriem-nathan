@@ -73,7 +73,9 @@ Next we will drop the factor Oceania
 
 
 ```r
-ByeOceania <- gapminder %>% filter(continent != "Oceania") %>% droplevels()
+ByeOceania <- gapminder %>% 
+  filter(continent != "Oceania") %>% 
+  droplevels()
 ```
 
 Now lets check the numbers of rows in Gapminder, it should be 24 observations less than the original gapminder
@@ -132,21 +134,27 @@ The variable I will be working with is the gdp Per capita.  We will be focusing 
 
 
 ```r
-ContinentReOrder <- fct_reorder(ByeOceania$country, ByeOceania$gdpPercap, max, .desc= TRUE) %>% levels() %>% head()
+ContinentReOrder <- fct_reorder(ByeOceania$country, ByeOceania$gdpPercap, max, .desc= TRUE) %>% 
+  levels() %>% 
+  head()
 ```
 
 With the reordering done, I will define MaxGDP as a dataframe with only the year, country, and the gdp per capita.  It eliminates the life Expectancy and the continent factors
 
 
 ```r
-MaxGDP <- ByeOceania %>% filter(country %in% ContinentReOrder) %>% select(year, country, gdpPercap)
+MaxGDP <- ByeOceania %>% 
+  filter(country %in% ContinentReOrder) %>% 
+  select(year, country, gdpPercap)
 ```
 
 Lets plot Max GDP!
 
 
 ```r
-ggplot(MaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + geom_line() + scale_colour_brewer(palette="Dark2") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
+ggplot(MaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + 
+  geom_line() + scale_colour_brewer(palette="Dark2") + 
+  labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
 ```
 
 ![](Answers_To_HW5_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
@@ -160,7 +168,8 @@ In the table below, you'll notice that it is arrangd in alphabetical order by co
 
 
 ```r
-MaxGDP %>% group_by(country) %>% knitr::kable(format="html")
+MaxGDP %>% group_by(country) %>% 
+  knitr::kable(format="html")
 ```
 
 <table>
@@ -542,7 +551,9 @@ And the plot looks like this:
 
 
 ```r
-ggplot(MaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + geom_line() + scale_colour_brewer(palette="Dark2") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
+ggplot(MaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + geom_line() + 
+  scale_colour_brewer(palette="Dark2") + 
+  labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
 ```
 
 ![](Answers_To_HW5_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
@@ -551,7 +562,9 @@ Now we re-arrange the dataframe to descend in terms of GDP per Cap
 
 
 ```r
-AsceMaxGDP <- MaxGDP %>% group_by(country) %>% arrange(desc(gdpPercap))
+AsceMaxGDP <- MaxGDP %>% 
+  group_by(country) %>% 
+  arrange(desc(gdpPercap))
 knitr::kable(AsceMaxGDP, format="html")
 ```
 
@@ -931,7 +944,10 @@ and the plot looks like this:
 
 
 ```r
-ggplot(AsceMaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + geom_line() + scale_colour_brewer(palette="Dark2") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
+ggplot(AsceMaxGDP, aes(year, gdpPercap, colour= country)) + facet_wrap(~country) + 
+  geom_line() + 
+  scale_colour_brewer(palette="Dark2") + 
+  labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
 ```
 
 ![](Answers_To_HW5_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
@@ -942,7 +958,10 @@ We are going to attempt to change the graph so that it is ordered by descending 
 
 
 ```r
-HighGDP <- MaxGDP %>% group_by(country, year) %>% summarize(maximumgdp= max(gdpPercap)) %>% arrange(desc(maximumgdp))
+HighGDP <- MaxGDP %>% 
+  group_by(country, year) %>% 
+  summarize(maximumgdp= max(gdpPercap)) %>% 
+  arrange(desc(maximumgdp))
 
 knitr::kable(HighGDP, format="html")
 ```
@@ -1325,7 +1344,9 @@ In this graph, the legend illustrates the country with the highest gdp in descen
 
 
 ```r
-ggplot(HighGDP, aes(year, maximumgdp, colour= fct_reorder(country, maximumgdp, .desc=TRUE))) + facet_wrap(~country) + geom_line() + scale_colour_discrete(name="Highest GDP per Cap") + labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
+ggplot(HighGDP, aes(year, maximumgdp, colour= fct_reorder(country, maximumgdp, .desc=TRUE))) + 
+  facet_wrap(~country) + geom_line() + scale_colour_discrete(name="Highest GDP per Cap") + 
+  labs(x= "Year", y= "GDP Per Cap", title="Countries with Max GDP per Cap") + theme_bw()
 ```
 
 ![](Answers_To_HW5_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
@@ -1360,7 +1381,9 @@ First, here is the graph and code as it was written in [HW2](https://github.com/
 ```r
 NorthAfrica <- filter(gapminder, country=="Algeria" | country=="Tunisia" | country=="Egypt" | country=="Morocco" | country=="Libya" | country=="Sudan")
 
-ggplot(NorthAfrica, aes(x= country, y=lifeExp)) + geom_boxplot(colour= "black", fill="red", alpha=0.33) + labs(x="Country", y="Life Expectancy") + ggtitle("Boxplot of Life Expectancy of North African Countries")
+ggplot(NorthAfrica, aes(x= country, y=lifeExp)) + 
+  geom_boxplot(colour= "black", fill="red", alpha=0.33) + labs(x="Country", y="Life Expectancy") + 
+  ggtitle("Boxplot of Life Expectancy of North African Countries")
 ```
 
 ![](Answers_To_HW5_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
@@ -1377,7 +1400,10 @@ And the graph as well
 
 
 ```r
-NAfricaPlot <- ggplot(NorthAfrica2, aes(country, lifeExp)) + geom_boxplot(aes(fill=country)) + scale_fill_brewer(palette = "Blues") + labs(x="Country", y="Life Expectancy", title="Life Expectancy of N. African Countries") + guides(fill=guide_legend(title="North African \nCountry")) + theme_bw() 
+NAfricaPlot <- ggplot(NorthAfrica2, aes(country, lifeExp)) + geom_boxplot(aes(fill=country)) + 
+  scale_fill_brewer(palette = "Blues") + 
+  labs(x="Country", y="Life Expectancy", title="Life Expectancy of N. African Countries") + guides(fill=guide_legend(title="North African \nCountry")) + 
+  theme_bw() 
 
 NAfricaPlot
 ```
